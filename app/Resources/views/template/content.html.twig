@@ -1,0 +1,13 @@
+{# app/Resources/views/template/content.html.twig #}
+
+{% block content %}
+
+<div class="content col-xs-10">
+    <div class="title-block">
+        <div class="title-block__name">{{ titleName }}</div>
+        <div class="delimeter"></div>
+    </div>
+    <div class="content-container col-xs-10">{% block mainContent %}{% endblock %}</div>
+</div>
+
+{% endblock %}

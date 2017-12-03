@@ -1,0 +1,54 @@
+.content {
+  .items-container {
+    display: inline-block;
+
+    .item {
+      margin-top: 15px;
+      text-align: center;
+      min-width: 162px;
+    }
+
+    .item__image-container {
+      margin-bottom: 5px;
+
+      img {
+        border: 1px solid #808080;
+        border-radius: 4px;
+        outline: none;
+      }
+    }
+
+    .item__title {
+      margin: 0 9px;
+      text-align: left;
+      font-size: 15px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      padding-left: 0;
+    }
+
+    .item__year {
+      text-align: left;
+      font-size: 12px;
+      color: #787878;
+      padding-left: 9px;
+    }
+
+    .item__rate {
+      padding: 0;
+      padding-right: 9px;
+      text-align: right;
+      color: #afac6a;
+    }
+
+    .description_container {
+      min-width: 140px;
+    }
+
+    .description_container__subscription {
+      position: relative;
+      padding: 0;
+    }
+  }
+}

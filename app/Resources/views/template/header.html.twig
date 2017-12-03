@@ -1,0 +1,14 @@
+{# app/Resources/views/template/header.html.twig #}
+
+{% block header %}
+    <header class="header">
+        <div class="header-block col-xs-2 header-block_aligned">
+            <div class="header-block__icon"></div>
+            <div class="header-block__title">SerialsNet</div>
+        </div>
+        <div class="col-xs-10 header-block_aligned">
+            <div class="search-field"></div>
+           {% block user_block %}{% endblock %}
+        </div>
+    </header>
+{% endblock %}

@@ -1,0 +1,26 @@
+{# app/Resources/views/main/catalog.html.twig #}
+
+{% extends "layout.html.twig" %}
+
+{% block mainContentStyle %}catalog{% endblock %}
+
+{% block mainContent %}
+<div class="items-container">
+    {% for item in items %}
+        {%  if item %}
+        <div class="item col-md-2">
+            <a href="{{ path('itempage', {'id': item.id}) }}" class="item__image-container">
+                <img class="" width="142" height="220" />
+            </a>
+            <div class="description_container">
+                <div class="item__title col-md-12">{{ item.title }}</div>
+                <div class="description_container__subscription col-md-12">
+                    <div class="item__year col-md-9">{{ item.year }}</div>
+                    <div class="item__rate col-md-3">8.7</div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

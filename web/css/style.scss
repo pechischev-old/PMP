@@ -1,0 +1,20 @@
+$MIN_HEIGHT: 720px;
+
+@import "header.scss";
+@import "sidebar.scss";
+@import "content.scss";
+@import "catalog/catalog.scss";
+@import "itemPage/item_page.scss";
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+}
+
+.delimeter {
+    border: 1px solid #BFBFBF;
+}
+
+.main-container {
+    height: 100%;
+}

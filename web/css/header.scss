@@ -1,0 +1,28 @@
+.header {
+    height: 70px;
+    background: #4A4A4A;
+    color: #FFFFFF;
+}
+
+.header-block {
+    position: relative;
+}
+
+.header-block__icon {
+    position: relative;
+    top: 14px;
+    width: 23px;
+    height: 17px;
+    background: #FFFFFF;
+    background-size: 23px 17px;
+    float: left;
+    margin-right: 6px;
+}
+
+.header-block__title {
+    font-size: 27px;
+}
+
+.header-block_aligned {
+    margin: 16px 0;
+}

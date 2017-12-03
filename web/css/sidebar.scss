@@ -1,0 +1,29 @@
+.sidebar-block {
+    position: relative;
+    background: #ECECEC;
+    height: 100%;
+    min-height: $MIN_HEIGHT;
+}
+
+.category-block {
+    margin-top: 22px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+.category-block__category_element {
+    margin: 5px 0;
+    margin-left: 25px;
+}
+
+.category-block__name {
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #9a9a9a;
+}
+
+.text-container {
+    color: black;
+    font-size: 18px;
+}
+

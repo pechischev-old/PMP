@@ -1,0 +1,29 @@
+.item-page {
+    .image-container {
+        text-align: center;
+    }
+
+    .image-container__image {
+        margin-bottom: 10px;
+    }
+
+    .rate {
+        font-size: 16px;
+    }
+
+    .info-block {
+        div {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    }
+
+    .request-block {
+        display: none;
+    }
+}

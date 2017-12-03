@@ -1,0 +1,29 @@
+{# app/Resources/views/layout.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <title>SerialsNet</title>
+</head>
+<body>
+{{ include('template/header.html.twig') }}
+
+<div class="container-fluid">
+    <div class="main-container row">
+    {{ include('template/sidebar.html.twig') }}
+    <div class="content col-xs-10">
+        <div class="title-block">
+            <div class="title-block__name">{{ titleName }}</div>
+            <div class="delimeter"></div>
+        </div>
+        <div class="content-container col-xs-10 {% block mainContentStyle %}{% endblock %}">{% block mainContent %}{% endblock %}</div>
+    </div>
+    </div>
+</div>
+
+{{ include('template/footer.html.twig') }}
+</body>
+</html>

@@ -1,0 +1,22 @@
+{# app/Resources/views/template/sidebar.html.twig #}
+
+
+
+{% block sidebar %}
+    <div class="sidebar-block col-xs-2">
+
+        {% block categoryBlock %}
+        <div class="category-block">
+            <div class="category-block__name">Жанры</div>
+
+            {% for genry in genries %}
+            <div class="category-block__category_element text-container">
+                <div class="text-container__text">{{ genry }}</div>
+            </div>
+            {% endfor %}
+
+        </div>
+        {% endblock %}
+
+    </div>
+{% endblock %}

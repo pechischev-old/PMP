@@ -1,0 +1,24 @@
+{# app/Resources/views/item-page/content.html.twig #}
+
+{% extends "layout.html.twig" %}
+
+{% block mainContentStyle %}item-page{% endblock %}
+
+{% block mainContent %}
+    <div class="image-container col-xs-3">
+        <img class="image-container__image" width="300" height="408"/>
+        <div class="rate col-xs-12">Рейтинг 8.7/10 </div>
+    </div>
+    <div class="info-block col-xs-9">
+        <div class="info-block__description-title title" >Cюжет</div>
+        <div class="info-block__description" >{{ item.description }} </div>
+        <div class="info-block__acters-title title" >Актеры</div>
+        <div class="info-block__acters-list" >{{ item.actors }} </div>
+    </div>
+    <div class="request-block сol-xs-12">
+        <div class="col-xs-8">
+            <input />
+            <button>Добавить</button>
+        </div>
+    </div>
+{% endblock %}
