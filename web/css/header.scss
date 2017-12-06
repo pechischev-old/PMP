@@ -2,27 +2,38 @@
     height: 70px;
     background: #4A4A4A;
     color: #FFFFFF;
-}
 
-.header-block {
-    position: relative;
-}
+    .header-block {
+        position: relative;
 
-.header-block__icon {
-    position: relative;
-    top: 14px;
-    width: 23px;
-    height: 17px;
-    background: #FFFFFF;
-    background-size: 23px 17px;
-    float: left;
-    margin-right: 6px;
-}
+        &__icon {
+            position: relative;
+            top: 14px;
+            width: 23px;
+            height: 17px;
+            background: #FFFFFF;
+            background-size: 23px 17px;
+            float: left;
+            margin-right: 6px;
+        }
 
-.header-block__title {
-    font-size: 27px;
-}
+        &__title {
+            font-size: 27px;
+        }
 
-.header-block_aligned {
-    margin: 16px 0;
+        &_aligned {
+            margin: 16px 0;
+        }
+    }
+
+    .user-block {
+        float: right;
+
+        &__text {
+            font-size: 18px;
+            line-height: 2;
+            text-decoration: none;
+            color: #FFFFFF;
+        }
+    }
 }

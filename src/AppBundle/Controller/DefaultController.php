@@ -66,4 +66,14 @@ class DefaultController extends Controller
             'item' => $serial,
         ]);
     }
+
+    /**
+     * @Route("/input", name="inputForm")
+     */
+    public function showLoginForm(Request $request)
+    {
+        return $this->render('inputForm/inputForm.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        ]);
+    }
 }

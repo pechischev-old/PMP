@@ -8,7 +8,11 @@
         </div>
         <div class="col-xs-10 header-block_aligned">
             <div class="search-field"></div>
-           {% block user_block %}{% endblock %}
+            {% block user_block %}
+                <div class="user-block">
+                    <a href="{{ path('inputForm') }}" class="user-block__text"> Вход|Регистрация</a>
+                </div>
+            {% endblock %}
         </div>
     </header>
 {% endblock %}
