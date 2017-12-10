@@ -1,11 +1,25 @@
 {# app/Resources/views/template/sidebar.html.twig #}
 
 
-
 {% block sidebar %}
-    <div class="sidebar-block col-xs-2">
+    <div class="sidebar-block col-xs-2 col-sm-2">
 
-        {% block categoryBlock %}
+    {% if app.user %}
+        <div class="category-block">
+            <div class="category-block__name">Пользователь</div>
+
+                <div class="category-block__category_element text-container">
+                    <div class="text-container__text">Мои сериалы</div>
+                </div>
+                <div class="category-block__category_element text-container">
+                    <div class="text-container__text">Просмотренные</div>
+                </div>
+                <div class="category-block__category_element text-container">
+                    <div class="text-container__text">Расписание</div>
+                </div>
+        </div>
+    {% endif %}
+
         <div class="category-block">
             <div class="category-block__name">Жанры</div>
 
@@ -16,7 +30,6 @@
             {% endfor %}
 
         </div>
-        {% endblock %}
 
     </div>
 {% endblock %}

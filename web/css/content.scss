@@ -1,17 +1,8 @@
 .content {
     position: relative;
     min-height: $MIN_HEIGHT;
-}
 
-.title-block {
-    margin-top: 21px;
-    margin-left: 15px;
-    margin-right: 25px;
-    margin-bottom: 15px;
-}
-
-.title-block__name {
-    padding-left: 10px;
-    padding-bottom: 7px;
-    font-size: 24px;
+    .page-header {
+        margin-top: 20px;
+    }
 }

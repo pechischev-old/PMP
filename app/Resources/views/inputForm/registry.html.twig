@@ -1,0 +1,60 @@
+{# app/Resources/views/item-page/content.html.twig #}
+
+{% extends "base.html.twig" %}
+
+{% block title %}Вход/регистрация{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/inputForm/style.css') }}" />
+    <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="main-container row row-centered">
+            <div class="content registry">
+                <div class="header col-md-12">
+                    <a href="{{ path('login') }}" id="login" class="header-block col-md-6">
+                        <div class="text-container">Войти</div>
+                    </a>
+                    <div href="" id="registry" class="header-block header-block_active col-md-6">
+                        <div class="text-container">Регистрация</div>
+                    </div>
+                </div>
+                <div class="input-form-container">
+                    <div class="input-form col-md-12">
+                        {{ form_start(form, {'attr': {'class': 'form-horizontal'} }) }}
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                            {{ form_row(form.username, {'attr': {'class': 'form-control'} }) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                {{ form_row(form.email, {'attr': {'class': 'form-control'} }) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                {{ form_row(form.password.first, {'attr': {'class': 'form-control'} }) }}
+                            </div>
+                        </div><div class="form-group">
+                            <div class="col-sm-12">
+                                {{ form_row(form.password.second, {'attr': {'class': 'form-control'} }) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-button col-sm-offset-1 col-sm-10">
+                                <button type="submit" class="btn btn-primary">Войти</button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}{% endblock %}

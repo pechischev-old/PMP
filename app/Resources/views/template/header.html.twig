@@ -8,11 +8,32 @@
         </div>
         <div class="col-xs-10 header-block_aligned">
             <div class="search-field"></div>
-            {% block user_block %}
-                <div class="user-block">
-                    <a href="{{ path('inputForm') }}" class="user-block__text"> Вход|Регистрация</a>
-                </div>
-            {% endblock %}
+            <div class="user-block">
+                {% if app.user %}
+                    <div class="user-block_registry user">
+                        <div class="user__icon"></div>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn dropdown-toggle user__button" data-toggle="dropdown">
+                                <div class="user__name">{{ app.user.username }}</div>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="user__dropdown-menu dropdown-menu" role="menu">
+                                <li><a href="#">Личный кабинет</a></li>
+                                <li><a href="#">Оповещения</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{{ logout_path('main') }}">Выход</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="user-block__container">
+                        <a href="{{ path('login') }}" class="user-block__text">Вход</a>
+                        <div class="user-block__delimeter"> | </div>
+                        <a href="{{ path('register') }}" class="user-block__text">Регистрация</a>
+                    </div>
+                {% endif %}
+            </div>
         </div>
     </header>
 {% endblock %}

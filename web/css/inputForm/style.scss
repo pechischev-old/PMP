@@ -26,9 +26,28 @@ body {
     margin: auto;
 }
 
+.registry {
+    height: 600px;
+}
+
+.login {
+    height: 405px;
+}
+
+.login {
+    &.error {
+        height: 435px;
+    }
+}
+
 .header {
     padding: 0;
     margin-bottom: 30px;
+
+    a {
+        text-decoration: none;
+        color: #000000bd;
+    }
 }
 
 .header-block {
@@ -55,14 +74,6 @@ body {
         vertical-align: middle;
         font-size: 22px;
     }
-}
-
-.login {
-    height: $LOGIN_FIELD_HEIGHT;
-}
-
-.registry {
-    height: $REGISTRY_FIELD_HEIGHT;
 }
 
 .input-form {

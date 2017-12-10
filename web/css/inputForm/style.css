@@ -19,9 +19,21 @@ body {
   bottom: 0;
   margin: auto; }
 
+.registry {
+  height: 600px; }
+
+.login {
+  height: 405px; }
+
+.login.error {
+  height: 435px; }
+
 .header {
   padding: 0;
   margin-bottom: 30px; }
+  .header a {
+    text-decoration: none;
+    color: #000000bd; }
 
 .header-block {
   height: 76px;
@@ -39,12 +51,6 @@ body {
     display: table-cell;
     vertical-align: middle;
     font-size: 22px; }
-
-.login {
-  height: 235px; }
-
-.registry {
-  height: 285px; }
 
 .input-form {
   margin-top: 10px;
