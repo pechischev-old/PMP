@@ -8,23 +8,26 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/resizeHandler.js') }}"></script>
     <title>SerialsNet</title>
 </head>
 <body>
-{{ include('template/header.html.twig') }}
+<div class="main-container">
+    {{ include('template/header.html.twig') }}
 
-<div class="container-fluid">
-    <div class="main-container row">
-    {{ include('template/sidebar.html.twig') }}
-    <div class="content col-xs-10 col-sm-9">
-        <div class="page-header">
-            <h3>{{ titleName }}</h3>
+    <div class="container-fluid content-container">
+        <div class="row" id="content">
+        {{ include('template/sidebar.html.twig') }}
+        <div class="content col-xs-10 col-sm-9">
+            <div class="page-header">
+                <h3>{{ titleName }}</h3>
+            </div>
+            <div class="content-container col-xs-10 {% block mainContentStyle %}{% endblock %}">{% block mainContent %}{% endblock %}</div>
         </div>
-        <div class="content-container col-xs-10 {% block mainContentStyle %}{% endblock %}">{% block mainContent %}{% endblock %}</div>
+        </div>
     </div>
-    </div>
-</div>
 
-{{ include('template/footer.html.twig') }}
+    {{ include('template/footer.html.twig') }}
+</div>
 </body>
 </html>

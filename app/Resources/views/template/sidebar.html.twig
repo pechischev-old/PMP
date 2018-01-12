@@ -2,22 +2,23 @@
 
 
 {% block sidebar %}
-    <div class="sidebar-block col-xs-2 col-sm-2">
+    <div class="sidebar col-xs-2 col-sm-2">
 
     {% if app.user %}
         <div class="category-block">
             <div class="category-block__name">Пользователь</div>
 
                 <div class="category-block__category_element text-container">
-                    <div class="text-container__text">Мои сериалы</div>
+                    <a href="{{ path("serials")}}" class="text-container__text">Мои сериалы</a>
                 </div>
                 <div class="category-block__category_element text-container">
-                    <div class="text-container__text">Просмотренные</div>
+                    <a href="{{ path("viewed") }}" class="text-container__text">Просмотренные</a>
                 </div>
                 <div class="category-block__category_element text-container">
-                    <div class="text-container__text">Расписание</div>
+                    <a href="{{ path("timetable") }}" class="text-container__text">Расписание</a>
                 </div>
         </div>
+        <div class="delimeter"></div>
     {% endif %}
 
         <div class="category-block">
@@ -25,7 +26,7 @@
 
             {% for genry in genries %}
             <div class="category-block__category_element text-container">
-                <div class="text-container__text">{{ genry }}</div>
+                <a href="{{ path("homepage") }}" class="text-container__text">{{ genry }}</a>
             </div>
             {% endfor %}
 

@@ -1,0 +1,23 @@
+{# app/Resources/views/user/seasonPage.html.twig #}
+
+{% extends "layout.html.twig" %}
+
+{% block mainContentStyle %}items{% endblock %}
+
+
+{% block mainContent %}
+<div class="items-container col-md-12">
+    <div class="item-block col-md-12">
+        <div class="item-block__title col-md-12">Сезон 1</div>
+        <div class="item-block__items-list col-md-12">
+            {% for i in range(1, 14) %}
+                <div class="user-item">
+                    <div class="user-item__icon"></div>
+                    <div class="user-item__visible-icon"></div>
+                    <div class="user-item__description">Серия {{ i }} </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

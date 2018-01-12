@@ -1,6 +1,7 @@
 .item-page {
     .image-container {
         text-align: center;
+        min-width: 300px;
     }
 
     .image-container__image {
@@ -20,6 +21,24 @@
         .title {
             font-size: 18px;
             font-weight: bold;
+        }
+    }
+
+    .tags-list {
+        display: inline-block;
+
+        &__tag {
+            display: inline;
+            float: left;
+            margin-right: 8px;
+            margin-bottom: 10px;
+            padding: 5px 10px;
+            background: #ECECEC;
+            border-radius: 5px;
+
+            &:hover {
+                background: #DADADA;
+            }
         }
     }
 

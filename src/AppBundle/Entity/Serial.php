@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
@@ -17,18 +18,19 @@ class Serial {
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=256)
+     * @ORM\OneToOne(targetEntity="SerialData")
      */
-    private $title;
+    private $data;
+
     /**
      * @ORM\Column(type="text")
      */
     private $description;
 
     /**
-     * @ORM\Column(type="integer", length=4)
+     * @ORM\Column(type="float")
      */
-    private $year;
+    private $rate;
 
     /**
      * @ORM\Column(type="text")
@@ -139,5 +141,53 @@ class Serial {
     public function getActors()
     {
         return $this->actors;
+    }
+
+    /**
+     * Set rate
+     *
+     * @param float $rate
+     *
+     * @return Serial
+     */
+    public function setRate($rate)
+    {
+        $this->rate = $rate;
+
+        return $this;
+    }
+
+    /**
+     * Get rate
+     *
+     * @return float
+     */
+    public function getRate()
+    {
+        return $this->rate;
+    }
+
+    /**
+     * Set data
+     *
+     * @param \AppBundle\Entity\SerialData $data
+     *
+     * @return Serial
+     */
+    public function setData(\AppBundle\Entity\SerialData $data = null)
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    /**
+     * Get data
+     *
+     * @return \AppBundle\Entity\SerialData
+     */
+    public function getData()
+    {
+        return $this->data;
     }
 }

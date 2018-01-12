@@ -1,0 +1,30 @@
+.timetable {
+
+  .column {
+    padding: 12px 15px;
+    font-size: 16px;
+    vertical-align: middle;
+    text-align: center;
+
+    &__capture {
+      width: 100px;
+      height: 80px;
+      background: #E2E2E2;
+      float: left;
+    }
+
+    .text-block {
+      display: table;
+      height: 80px;
+    }
+
+    &__text {
+      padding: 0 15px;
+      text-align: left;
+      vertical-align: middle;
+      display: table-cell;
+    }
+  }
+
+
+}

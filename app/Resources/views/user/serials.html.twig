@@ -1,0 +1,24 @@
+{# app/Resources/views/user/serials.html.twig #}
+
+{% extends "layout.html.twig" %}
+
+{% block mainContentStyle %}items{% endblock %}
+
+{% block mainContent %}
+<div class="items-container col-md-12">
+    {% for i in range(1, 6) %}
+
+        <div class="item-block serial col-md-12">
+            <div class="item-block__title col-md-12">Сериал {{ i }}</div>
+            <div class="item-block__items-list  col-md-12">
+                {% for i in range(1, 5) %}
+                    <div class="user-item">
+                        <a href="{{ path("season_page") }}" ><div class="user-item__icon"></div></a>
+                        <div class="user-item__description">Сезон {{ i }} </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

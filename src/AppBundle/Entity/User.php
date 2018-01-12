@@ -37,6 +37,11 @@ class User implements UserInterface {
     private $password;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $role = 0;
+
+    /**
      * User constructor.
      */
     public function __construct()

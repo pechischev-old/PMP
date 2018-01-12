@@ -80,9 +80,14 @@ body {
     margin-top: 10px;
     padding: 0 35px;
 
+    .form-group {
+        margin: 0;
+    }
+
     .form-control {
         padding-top: 27px;
         padding-bottom: 27px;
+        margin-bottom: 15px;
         font-size: 22px;
     }
 
@@ -104,7 +109,7 @@ body {
         margin-top: 15px;
 
         button {
-            width: 458px;
+            width: 410px;
             height: 43px;
             font-size: 20px;
         }

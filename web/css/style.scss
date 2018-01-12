@@ -1,20 +1,44 @@
-$MIN_HEIGHT: 720px;
+$MIN_HEIGHT: 100%;
+$HEADER_HEIGHT: 70px;
+$FOOTER_HEIGHT: 41px;
 
 @import "header.scss";
 @import "sidebar.scss";
 @import "content.scss";
 @import "catalog/catalog.scss";
 @import "itemPage/item_page.scss";
+@import "user/user_styles";
+
+html {
+    height: 100%;
+}
 
 body {
+    min-height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     user-select: none;
 }
 
+a, a:hover, a:focus {
+    text-decoration: none;
+}
+
 .delimeter {
-    border: 1px solid #BFBFBF;
+    border: 1px solid #D8D6D6;
 }
 
 .main-container {
+    position: absolute;
     height: 100%;
+    width: 100%;
+
+    .content-container {
+        position: relative;
+        min-height: calc(100% - 70px);
+        padding-bottom: $FOOTER_HEIGHT;
+    }
+
+    footer {
+        margin-top: -41px;
+    }
 }

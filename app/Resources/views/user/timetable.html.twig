@@ -1,0 +1,26 @@
+{# app/Resources/views/user/timetable.html.twig #}
+
+{% extends "layout.html.twig" %}
+
+{% block mainContentStyle %}timetable{% endblock %}
+
+{% block mainContent %}
+<div class="items-container col-xs-12">
+    <table class="table table-bordered">
+        <tbody>
+        {% for i in range(1, 10) %}
+        <tr>
+            <td class="column col-xs-6">
+                <div class="column__capture"></div>
+                <div class="text-block">
+                    <div class="column__text">Название сериала {{ i }}</div>
+                </div>
+            </td>
+            <td class="column col-xs-3">4 сезон 5 серия</td>
+            <td class="column col-xs-3">17.12.2017</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

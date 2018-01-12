@@ -1,4 +1,4 @@
-.sidebar-block {
+.sidebar {
     position: relative;
     background: #ECECEC;
     height: 100%;
@@ -7,14 +7,14 @@
 }
 
 .category-block {
-    margin-top: 22px;
-    margin-left: 15px;
-    margin-bottom: 15px;
+    margin-top: 17px;
+    margin-left: 5px;
+    margin-bottom: 17px;
 }
 
 .category-block__category_element {
     margin: 5px 0;
-    margin-left: 25px;
+    margin-left: 15px;
 }
 
 .category-block__name {
@@ -24,7 +24,9 @@
 }
 
 .text-container {
-    color: black;
-    font-size: 18px;
+    &__text {
+        color: black;
+        font-size: 18px;
+    }
 }
 

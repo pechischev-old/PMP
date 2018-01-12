@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Constant\Genry;
 use AppBundle\Entity\Serial;
+use AppBundle\Entity\SerialData;
 use Doctrine\DBAL\Types\IntegerType;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,20 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    private $genries = array(
-        'Мультсериалы',
-        'Биография',
-        'Детектив',
-        'Драма',
-        'Комедия',
-        'Криминал',
-        'Хоррор',
-        'Семейные',
-        'Фантастика',
-        'Фэнтези',
-        'Исторические',
-    );
-
     /**
      * @Route("/", name="homepage")
      */
@@ -37,9 +25,9 @@ class DefaultController extends Controller
         // replace this example code with whatever you need
         return $this->render('main/catalog.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-			'genries' => $this->genries,
+			'genries' => Genry::getGenries(),
             'titleName' => "Каталог",
-            "items" => $this->getDoctrine()->getRepository(Serial::class)->findAll(),
+            "itemsData" => $this->getDoctrine()->getRepository(SerialData::class)->findAll(),
         ]);
     }
 
@@ -48,22 +36,19 @@ class DefaultController extends Controller
      */
     public function showItemPage(Request $request, $id)
     {
-        $serial = $this->getDoctrine()
-            ->getRepository(Serial::class)
+        $serialData = $this->getDoctrine()
+            ->getRepository(SerialData::class)
             ->find($id);
 
-        if (!$serial) {
-            throw $this->createNotFoundException(
-                'No product found for id '.$id
-            );
-        }
+        $serial = $this->getDoctrine()->getRepository(Serial::class)->findOneBy(['data' => $id]);
 
         // replace this example code with whatever you need
         return $this->render('itemPage/itemPage.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-            'genries' => $this->genries,
-            'titleName' => $serial->getTitle(),
-            'item' => $serial,
+            'genries' => Genry::getGenries(),
+            'titleName' => $serialData->getTitle(),
+            'data' => $serialData,
+            'previewInfo' => $serial,
         ]);
     }
 

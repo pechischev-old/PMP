@@ -1,10 +1,14 @@
 .header {
-    height: 70px;
+    height: $HEADER_HEIGHT;
     background: #4A4A4A;
     color: #FFFFFF;
 
     .header-block {
         position: relative;
+
+        &:hover {
+            opacity: 0.85;
+        }
 
         &__icon {
             position: relative;
@@ -18,7 +22,9 @@
         }
 
         &__title {
+            cursor: pointer;
             font-size: 27px;
+            color: #FFFFFF;
         }
 
         &_aligned {
