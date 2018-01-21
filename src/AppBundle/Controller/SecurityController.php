@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\FormValidate;
 use AppBundle\Entity\User;
+use AppBundle\Entity\UserHistory;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class SecurityController extends Controller {
@@ -32,6 +33,7 @@ class SecurityController extends Controller {
             $user->setPassword($password);
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
+            $em->persist($this->createUserHistory($user));
             $em->flush();
             $token = new UsernamePasswordToken($user, null, self::SECURITY_FIREWALL, $user->getRoles());
             $this->get('security.token_storage')->setToken($token);
@@ -63,11 +65,19 @@ class SecurityController extends Controller {
     public function loginCheckAction()
     {
     }
+
     /**
      * @Route("/logout", name="logout")
      */
     public function logoutAction()
     {
+    }
+
+    private function createUserHistory(User &$user)
+    {
+        $userHistory = new UserHistory();
+        $userHistory->setUser($user);
+        return $userHistory;
     }
 
 }

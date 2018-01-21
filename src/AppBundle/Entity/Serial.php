@@ -28,11 +28,6 @@ class Serial {
     private $description;
 
     /**
-     * @ORM\Column(type="float")
-     */
-    private $rate;
-
-    /**
      * @ORM\Column(type="text")
      */
     private $actors;

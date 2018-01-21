@@ -30,25 +30,19 @@ class SerialData
     private $rate;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $seasonNumber;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Series", inversedBy="serialData")
-     * @ORM\JoinColumn(name="series_id", referencedColumnName="id")
-     */
-    private $series;
-
-    /**
      * @ORM\Column(type="integer", length=4)
      */
     private $year;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="integer", length=4)
      */
-    private $status;
+    private $endYear;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Season", mappedBy="serialData")
+     */
+    private $season;
 
     /**
      * @ORM\Column(type="string")
@@ -169,78 +163,6 @@ class SerialData
     }
 
     /**
-     * Set seasonNumber
-     *
-     * @param integer $seasonNumber
-     *
-     * @return SerialData
-     */
-    public function setSeasonNumber($seasonNumber)
-    {
-        $this->seasonNumber = $seasonNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get seasonNumber
-     *
-     * @return integer
-     */
-    public function getSeasonNumber()
-    {
-        return $this->seasonNumber;
-    }
-
-    /**
-     * Add series
-     *
-     * @param \AppBundle\Entity\Series $series
-     *
-     * @return SerialData
-     */
-    public function addSeries(\AppBundle\Entity\Series $series)
-    {
-        $this->series[] = $series;
-
-        return $this;
-    }
-
-    /**
-     * Remove series
-     *
-     * @param \AppBundle\Entity\Series $series
-     */
-    public function removeSeries(\AppBundle\Entity\Series $series)
-    {
-        $this->series->removeElement($series);
-    }
-
-    /**
-     * Get series
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSeries()
-    {
-        return $this->series;
-    }
-
-    /**
-     * Set series
-     *
-     * @param \AppBundle\Entity\Series $series
-     *
-     * @return SerialData
-     */
-    public function setSeries(\AppBundle\Entity\Series $series = null)
-    {
-        $this->series = $series;
-
-        return $this;
-    }
-
-    /**
      * Set rate
      *
      * @param float $rate
@@ -262,5 +184,63 @@ class SerialData
     public function getRate()
     {
         return $this->rate;
+    }
+
+    /**
+     * Set endYear
+     *
+     * @param integer $endYear
+     *
+     * @return SerialData
+     */
+    public function setEndYear($endYear)
+    {
+        $this->endYear = $endYear;
+
+        return $this;
+    }
+
+    /**
+     * Get endYear
+     *
+     * @return integer
+     */
+    public function getEndYear()
+    {
+        return $this->endYear;
+    }
+
+    /**
+     * Add season
+     *
+     * @param \AppBundle\Entity\Season $season
+     *
+     * @return SerialData
+     */
+    public function addSeason(\AppBundle\Entity\Season $season)
+    {
+        $this->season[] = $season;
+
+        return $this;
+    }
+
+    /**
+     * Remove season
+     *
+     * @param \AppBundle\Entity\Season $season
+     */
+    public function removeSeason(\AppBundle\Entity\Season $season)
+    {
+        $this->season->removeElement($season);
+    }
+
+    /**
+     * Get season
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSeason()
+    {
+        return $this->season;
     }
 }

@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Constant\Genry;
 use AppBundle\Entity\Serial;
 use AppBundle\Entity\SerialData;
+use AppBundle\Entity\User;
 use Doctrine\DBAL\Types\IntegerType;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
@@ -60,5 +61,11 @@ class DefaultController extends Controller
         return $this->render('inputForm/inputForm.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
+    }
+
+    private function getCurrentUser() {
+        $em = $this->getDoctrine()->getManager();
+        $id = $this->getUser()->getId();
+        return $em->getRepository(User::class)->find($id);
     }
 }

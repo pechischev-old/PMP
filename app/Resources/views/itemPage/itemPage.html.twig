@@ -21,6 +21,9 @@
                 <span class="tags-list__tag">{{ genry }}</span >
             {% endfor %}
         </div>
+        {% if app.user %}
+            <div><a href="{{ path('add_serial', {'id': data.id }) }}">Добавить к себе</a></div>
+        {% endif %}
 
     </div>
     <div class="request-block сol-xs-12">

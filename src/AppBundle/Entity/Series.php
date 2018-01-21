@@ -22,20 +22,26 @@ class Series
      */
     private $name;
 
-    /**
-     * @ORM\Column(type="string")
-     */
-    private $status;
+   /**
+    * @ORM\Column(type="string")
+    */
+   private $status;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\ManyToOne(targetEntity="Season", inversedBy="series")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $viewStatus;
+    private $season;
 
     /**
-     * @ORM\OneToMany(targetEntity="SerialData", mappedBy="series")
+     * Get id
+     *
+     * @return integer
      */
-    private $serial;
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set name
@@ -86,101 +92,26 @@ class Series
     }
 
     /**
-     * Set seasonCount
+     * Set season
      *
-     * @param integer $seasonCount
+     * @param \AppBundle\Entity\Season $season
      *
      * @return Series
      */
-    public function setSeasonCount($seasonCount)
+    public function setSeason(\AppBundle\Entity\Season $season = null)
     {
-        $this->seasonCount = $seasonCount;
+        $this->season = $season;
 
         return $this;
     }
 
     /**
-     * Get seasonCount
+     * Get season
      *
-     * @return integer
+     * @return \AppBundle\Entity\Season
      */
-    public function getSeasonCount()
+    public function getSeason()
     {
-        return $this->seasonCount;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->serial = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add serial
-     *
-     * @param \AppBundle\Entity\SerialData $serial
-     *
-     * @return Series
-     */
-    public function addSerial(\AppBundle\Entity\SerialData $serial)
-    {
-        $this->serial[] = $serial;
-
-        return $this;
-    }
-
-    /**
-     * Remove serial
-     *
-     * @param \AppBundle\Entity\SerialData $serial
-     */
-    public function removeSerial(\AppBundle\Entity\SerialData $serial)
-    {
-        $this->serial->removeElement($serial);
-    }
-
-    /**
-     * Get serial
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSerial()
-    {
-        return $this->serial;
-    }
-
-    /**
-     * Set viewStatus
-     *
-     * @param boolean $viewStatus
-     *
-     * @return Series
-     */
-    public function setViewStatus($viewStatus)
-    {
-        $this->viewStatus = $viewStatus;
-
-        return $this;
-    }
-
-    /**
-     * Get viewStatus
-     *
-     * @return boolean
-     */
-    public function getViewStatus()
-    {
-        return $this->viewStatus;
+        return $this->season;
     }
 }

@@ -141,4 +141,28 @@ class User implements UserInterface {
     {
         return $this->email;
     }
+
+    /**
+     * Set role
+     *
+     * @param integer $role
+     *
+     * @return User
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * Get role
+     *
+     * @return integer
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
 }

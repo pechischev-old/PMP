@@ -2,13 +2,14 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\SerialData;
 use AppBundle\Entity\User;
+use AppBundle\Entity\UserHistory;
 use Doctrine\DBAL\Types\IntegerType;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 
 use AppBundle\Constant\Genry;
+use AppBundle\Controller\SerialController;
 
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -18,29 +19,52 @@ use Symfony\Component\HttpFoundation\Request;
 class UserController extends Controller
 {
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->serialController = new SerialController();
+    }
+
+    /**
      * @Route("/serials", name="serials")
      */
     public function getSerials(Request $request) {
 
-        $user = $this->getCurrentUser();
+        $history = $this->getCurrentUserHistory();
 
-        $serials = []; //$user->getSerials();
+        $serialsData = $history->getSerialData()->getValues();
 
         // replace this example code with whatever you need
         return $this->render('user/serials.html.twig', [
             'titleName' => "Мои сериалы",
-            'items' => $serials,
+            'items' => $serialsData,
             'genries' => Genry::getGenries(),
         ]);
     }
 
     /**
-     * @Route("/season", name="season_page")
+     * @Route("/settings", name="settings")
      */
-    public function getSeasonPage(Request $request) {
+    public function showSettings(Request $request) {
+        $user = $this->getCurrentUser();
+
+        return $this->render('user/userRoom.html.twig', [
+            'titleName' => "Личный кабинет",
+            'genries' => Genry::getGenries(),
+        ]);
+    }
+
+    /**
+     * @Route("/season/{id}", name="season_page", requirements={"id" = "\d+"})
+     */
+    public function getSeasonPage(Request $request, $id) {
+        $season = $this->getDoctrine()->getRepository(User\UserSeason::class)->find($id);
+
         return $this->render('user/seasonPage.html.twig', [
             'titleName' => "Название сериала",
             'genries' => Genry::getGenries(),
+            'season' => $season
         ]);
     }
 
@@ -48,26 +72,33 @@ class UserController extends Controller
      * @Route("/user/viewed", name="viewed")
      */
     public function getViewedSerials(Request $request) {
-        // replace this example code with whatever you need
+        $history = $this->getCurrentUserHistory();
+
+        $serialsData = $history->getSerialData()->getValues();
+
         return $this->render('user/viewed.html.twig', [
             'titleName' => "Просмотренные",
             'genries' => Genry::getGenries(),
+            'items' => $serialsData
         ]);
     }
 
     /**
-     * @Route("/user/add", name="add_serial")
+     * @Route("/item/add?id={id}", name="add_serial", requirements={"id" = "\d+"})
      */
-    public function addSerialAction()
-    {
+    public function addSerialAction($id) {
         $em = $this->getDoctrine()->getManager();
-        $currentUser = $this->getCurrentUser();
+
+        $history = $this->getCurrentUserHistory();
+
+        $serialData = $this->serialController->createUserSerialData($id, $em);
+        $serialData->setHistory($history);
+        $history->addSerialDatum($serialData);
 
         $em->flush();
 
-        return new Response();
+        return $this->redirectToRoute('itempage', array("id" => $id));
     }
-
 
     /**
      * @Route("/user/timetable", name="timetable"   )
@@ -84,5 +115,10 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
         $id = $this->getUser()->getId();
         return $em->getRepository(User::class)->find($id);
+    }
+
+    private function getCurrentUserHistory() {
+        $user = $this->getCurrentUser();
+        return $this->getDoctrine()->getRepository(UserHistory::class)->findOneBy(['user' => $user->getId()]);
     }
 }

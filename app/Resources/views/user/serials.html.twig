@@ -6,15 +6,15 @@
 
 {% block mainContent %}
 <div class="items-container col-md-12">
-    {% for i in range(1, 6) %}
+    {% for data in items %}
 
         <div class="item-block serial col-md-12">
-            <div class="item-block__title col-md-12">Сериал {{ i }}</div>
+            <div class="item-block__title col-md-12">{{ data.getTitle() }}</div>
             <div class="item-block__items-list  col-md-12">
-                {% for i in range(1, 5) %}
+                {% for season in data.getUserSeason() %}
                     <div class="user-item">
-                        <a href="{{ path("season_page") }}" ><div class="user-item__icon"></div></a>
-                        <div class="user-item__description">Сезон {{ i }} </div>
+                        <a href="{{ path("season_page", { 'id': season.getId() }) }}" ><div class="user-item__icon"></div></a>
+                        <div class="user-item__description">Сезон {{ loop.index }} </div>
                     </div>
                 {% endfor %}
             </div>

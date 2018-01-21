@@ -16,7 +16,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UserHistory
 {
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -25,12 +24,12 @@ class UserHistory
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="User", inversedBy="userHistory")
+     * @ORM\OneToOne(targetEntity="User")
      */
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="SerialData", mappedBy="userHistory")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User\UserSerialData", mappedBy="history")
      */
     private $serialData;
     /**
@@ -68,11 +67,11 @@ class UserHistory
     /**
      * Add serialDatum
      *
-     * @param \AppBundle\Entity\SerialData $serialDatum
+     * @param \AppBundle\Entity\User\UserSerialData $serialDatum
      *
      * @return UserHistory
      */
-    public function addSerialDatum(\AppBundle\Entity\SerialData $serialDatum)
+    public function addSerialDatum(\AppBundle\Entity\User\UserSerialData $serialDatum)
     {
         $this->serialData[] = $serialDatum;
 
@@ -82,9 +81,9 @@ class UserHistory
     /**
      * Remove serialDatum
      *
-     * @param \AppBundle\Entity\SerialData $serialDatum
+     * @param \AppBundle\Entity\User\UserSerialData $serialDatum
      */
-    public function removeSerialDatum(\AppBundle\Entity\SerialData $serialDatum)
+    public function removeSerialDatum(\AppBundle\Entity\User\UserSerialData $serialDatum)
     {
         $this->serialData->removeElement($serialDatum);
     }

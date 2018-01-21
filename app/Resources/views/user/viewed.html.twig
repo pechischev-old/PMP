@@ -17,14 +17,14 @@
         </tr>
         </thead>
         <tbody>
-        {% for i in range(1, 10) %}
-        <tr>
-            <td class="column count col-xs-2">{{ i }}</td>
-            <td class="column name col-xs-4">Название сериала</td>
-            <td class="column col-xs-2">2014</td>
-            <td class="column col-xs-2">8.7</td>
-            <td class="column col-xs-2">Смотрю</td>
-        </tr>
+        {% for data in items %}
+            <tr>
+                <td class="column count col-xs-2">{{ loop.index }}</td>
+                <td class="column name col-xs-4">{{ data.getTitle() }}</td>
+                <td class="column col-xs-2">{{ data.getYear() }}</td>
+                <td class="column col-xs-2">{{ data.getRate() }}</td>
+                <td class="column col-xs-2">{{ data.getViewStatus() }}</td>
+            </tr>
         {% endfor %}
         </tbody>
     </table>
