@@ -185,7 +185,7 @@
     opacity: 0.5; }
     .items .user-item__visible-icon:hover {
       opacity: 0.7; }
-    .items .user-item__visible-icon__active {
+    .items .user-item__visible-icon_active {
       opacity: 1; }
   .items .user-item__description {
     text-align: center;

@@ -6,6 +6,7 @@ use AppBundle\Constant\Genry;
 use AppBundle\Entity\Serial;
 use AppBundle\Entity\SerialData;
 use AppBundle\Entity\User;
+use AppBundle\Entity\UserHistory;
 use Doctrine\DBAL\Types\IntegerType;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,12 +24,13 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $items = $this->getDoctrine()->getRepository(SerialData::class)->findAll();
+
         // replace this example code with whatever you need
         return $this->render('main/catalog.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
 			'genries' => Genry::getGenries(),
             'titleName' => "Каталог",
-            "itemsData" => $this->getDoctrine()->getRepository(SerialData::class)->findAll(),
+            "itemsData" => $items,
         ]);
     }
 
@@ -43,13 +45,22 @@ class DefaultController extends Controller
 
         $serial = $this->getDoctrine()->getRepository(Serial::class)->findOneBy(['data' => $id]);
 
+        $user = $this->getCurrentUser();
+        $hasItem = false;
+        if ($user)
+        {
+            global $serialId;
+            $serialId = $id;
+            $hasItem = $this->getCurrentUserHistory()->hasSerial($serialId);
+        }
+
         // replace this example code with whatever you need
         return $this->render('itemPage/itemPage.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'genries' => Genry::getGenries(),
             'titleName' => $serialData->getTitle(),
             'data' => $serialData,
             'previewInfo' => $serial,
+            "hasItem" => $hasItem,
         ]);
     }
 
@@ -58,8 +69,30 @@ class DefaultController extends Controller
      */
     public function showLoginForm(Request $request)
     {
-        return $this->render('inputForm/inputForm.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        return $this->render('inputForm/inputForm.html.twig');
+    }
+
+    /**
+     * @Route("/search?genry={genry}", name="searchBy")
+     */
+    public function findByGenre(Request $request, $genry) {
+        $allItems = $this->getDoctrine()->getRepository(SerialData::class)->findAll();
+
+        $items = array();
+
+        $lowGenry = mb_strtolower($genry); // TODO: сделать получше и зарефакторить, при больших данных будет долго искать
+        foreach ($allItems as $item) {
+            $itemGenries = $item->getGenries();
+
+            if (strpos($itemGenries, $lowGenry) !== false) {
+                array_push($items, $item);
+            }
+        }
+
+        return $this->render('main/catalog.html.twig', [
+            'genries' => Genry::getGenries(),
+            'titleName' => "Каталог",
+            "itemsData" => $items,
         ]);
     }
 
@@ -67,5 +100,10 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $id = $this->getUser()->getId();
         return $em->getRepository(User::class)->find($id);
+    }
+
+    private function getCurrentUserHistory() {
+        $user = $this->getCurrentUser();
+        return $this->getDoctrine()->getRepository(UserHistory::class)->findOneBy(['user' => $user->getId()]);
     }
 }

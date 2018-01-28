@@ -107,4 +107,15 @@ class UserHistory
     {
         return $this->id;
     }
+
+    public function hasSerial($serialId)
+    {
+        $arr =  $this->serialData->getValues();
+        foreach ($arr as $element) {
+            if ($element->getParentId() == $serialId ) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -26,7 +26,7 @@
 
             {% for genry in genries %}
             <div class="category-block__category_element text-container">
-                <a href="{{ path("homepage") }}" class="text-container__text">{{ genry }}</a>
+                <a href="{{ path("searchBy", {"genry": genry}) }}" class="text-container__text">{{ genry }}</a>
             </div>
             {% endfor %}
 

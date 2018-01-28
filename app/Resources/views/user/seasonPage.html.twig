@@ -13,7 +13,11 @@
             {% for series in season.getSeries() %}
                 <div class="user-item">
                     <div class="user-item__icon"></div>
-                    <div class="user-item__visible-icon"></div>
+                    {% set visibled = '' %}
+                    {% if series.getVisible() %}
+                        {% set visibled = 'user-item__visible-icon_active' %}
+                    {% endif %}
+                    <a href="{{ path("update_state_series", {'id': series.getId() }) }}"><div class="user-item__visible-icon {{ visibled }}"></div></a>
                     <div class="user-item__description">Серия {{ series.getSeries().getName() }} </div>
                 </div>
             {% endfor %}

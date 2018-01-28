@@ -45,6 +45,11 @@ class UserSerialData
         $this->userSeason = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function getParentId()
+    {
+        return $this->serialData->getId ();
+    }
+
     /**
      * @return string
      */

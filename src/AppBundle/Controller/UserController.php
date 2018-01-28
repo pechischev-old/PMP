@@ -18,9 +18,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends Controller
 {
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->serialController = new SerialController();
@@ -69,6 +66,21 @@ class UserController extends Controller
     }
 
     /**
+     * @Route("/series/{id}", name="update_state_series", requirements={"id" = "\d+"})
+     */
+    public function updateViewedSeriesState(Request $request, $id) {
+        $em = $this->getDoctrine()->getManager();
+
+        $series = $this->getDoctrine()->getRepository(User\UserSeries::class)->find($id);
+        $series->setVisible(!$series->getVisible());
+
+        $parentId = $series->getSeason()->getId();
+        $em->flush();
+
+        return $this->redirectToRoute('season_page', array("id" => $parentId));
+    }
+
+    /**
      * @Route("/user/viewed", name="viewed")
      */
     public function getViewedSerials(Request $request) {
@@ -83,6 +95,7 @@ class UserController extends Controller
         ]);
     }
 
+
     /**
      * @Route("/item/add?id={id}", name="add_serial", requirements={"id" = "\d+"})
      */
@@ -95,6 +108,20 @@ class UserController extends Controller
         $serialData->setHistory($history);
         $history->addSerialDatum($serialData);
 
+        $em->flush();
+
+        return $this->redirectToRoute('itempage', array("id" => $id));
+    }
+
+    /**
+     * @Route("/item/remove?id={id}", name="remove_serial", requirements={"id" = "\d+"})
+     */
+    public function removeSerialAction($id) {
+        $em = $this->getDoctrine()->getManager();
+
+        $history = $this->getCurrentUserHistory();
+        $serialData = $this->serialController->removeData($id, $em);
+        $history->removeSerialDatum($serialData);
         $em->flush();
 
         return $this->redirectToRoute('itempage', array("id" => $id));

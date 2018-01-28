@@ -22,7 +22,11 @@
             {% endfor %}
         </div>
         {% if app.user %}
-            <div><a href="{{ path('add_serial', {'id': data.id }) }}">Добавить к себе</a></div>
+            {% if not(hasItem) %}
+                <div><a href="{{ path('add_serial', {'id': data.id }) }}">Добавить в список</a></div>
+            {% else %}
+                <div><a href="{{ path('remove_serial', {'id': data.id }) }}">Удалить из списка</a></div>
+            {% endif %}
         {% endif %}
 
     </div>

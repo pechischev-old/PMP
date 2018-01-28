@@ -12,6 +12,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class SerialController extends Controller
 {
+    public function removeData($id, &$em) {
+        //$data = $em->getRepository(SerialData::class)->find($id);
+
+        $userData = $em->getRepository(UserSerialData::class)->findOneBy(['serialData' => $id]);
+
+        $seasons = $userData->getUserSeason();
+        foreach ($seasons as &$season) {
+            $series = $season->getSeries();
+
+            foreach ($series as &$item) {
+                $season->removeSeries($item);
+                $em->remove($item);
+            }
+
+            $userData->removeUSerSeason($season);
+            $em->remove($season);
+        }
+
+        $em->remove($userData);
+        return $userData;
+    }
+
     public function createUserSerialData($id, &$em) {
         $data = $em->getRepository(SerialData::class)->find($id);
 
@@ -25,7 +47,6 @@ class SerialController extends Controller
         }
 
         $em->persist($userData);
-
         return $userData;
     }
 
