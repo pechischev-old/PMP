@@ -11,6 +11,9 @@ use Doctrine\DBAL\Types\IntegerType;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 
+use AppBundle\Constant\TwigPath;
+use AppBundle\Constant\Consts;
+use AppBundle\lng\Message;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -24,13 +27,15 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        // TODO: get param for to filter data
         $items = $this->getDoctrine()->getRepository(SerialData::class)->findAll();
 
-        return $this->render('main/catalog.html.twig', [
-			'genries' => Genry::getGenries(),
-            'titleName' => "Каталог",
-            "itemsData" => $items,
-        ]);
+        $param = [
+            Consts::TITLE_PARAM => Message::CATALOG_TITLE,
+            Consts::DATA_PARAM => $items,
+        ];
+
+        return $this->getResponseByParameters(TwigPath::CATALOG, $param);
     }
 
     /**
@@ -42,7 +47,7 @@ class DefaultController extends Controller
             ->getRepository(SerialData::class)
             ->find($id);
 
-        $serial = $this->getDoctrine()->getRepository(Serial::class)->findOneBy(['data' => $id]);
+        $serial = $this->getDoctrine()->getRepository(Serial::class)->findOneBy([Consts::DATA => $id]);
 
         $hasItem = false;
         if ($this->getUser())
@@ -50,56 +55,75 @@ class DefaultController extends Controller
             $hasItem = $this->getCurrentUserHistory()->hasSerial($id);
         }
 
-        // replace this example code with whatever you need
-        return $this->render('itemPage/itemPage.html.twig', [
-            'genries' => Genry::getGenries(),
-            'titleName' => $serialData->getTitle(),
-            'data' => $serialData,
-            'previewInfo' => $serial,
-            "hasItem" => $hasItem,
-        ]);
-    }
+        $param = [
+            Consts::TITLE_PARAM => $serialData->getTitle(),
+            Consts::SERIAL_INFO_PARAM => $serialData,
+            Consts::PREVIEW_INFO_PARAM => $serial,
+            Consts::EXIST_ITEM_PARAM => $hasItem,
+        ];
 
-    /**
-     * @Route("/input", name="inputForm")
-     */
-    public function showLoginForm(Request $request)
-    {
-        return $this->render('inputForm/inputForm.html.twig');
+        return $this->getResponseByParameters(TwigPath::SERIAL_VIEW, $param);
     }
 
     /**
      * @Route("/search?genry={genry}", name="searchBy")
      */
-    public function findByGenre(Request $request, $genry) {
-        $allItems = $this->getDoctrine()->getRepository(SerialData::class)->findAll();
+    public function findByGenre(Request $request, $genry)
+    {
+        $items = $this->getDoctrine()->getRepository(SerialData::class)->findAll();
+        $filteredItems = $this->getFilteredItemsByGenre($genry, $items);
 
-        $items = array();
+        $param = [
+            Consts::TITLE_PARAM => Message::CATALOG_TITLE,
+            Consts::DATA_PARAM => $filteredItems,
+        ];
 
-        $lowGenry = mb_strtolower($genry); // TODO: сделать получше и зарефакторить, при больших данных будет долго искать
-        foreach ($allItems as $item) {
-            $itemGenries = $item->getGenries();
-
-            if (strpos($itemGenries, $lowGenry) !== false) {
-                array_push($items, $item);
-            }
-        }
-
-        return $this->render('main/catalog.html.twig', [
-            'genries' => Genry::getGenries(),
-            'titleName' => "Каталог",
-            "itemsData" => $items,
-        ]);
+        return $this->getResponseByParameters(TwigPath::CATALOG, $param);
     }
 
-    private function getCurrentUser() {
+    /**
+     * @param $path
+     * @param array $templateParameters
+     * @return Response
+     */
+    protected function getResponseByParameters($path, $templateParameters)
+    {
+        $templateParameters[Consts::GENRIES_PARAM] = Genry::getGenries();
+        return $this->render($path, $templateParameters);
+    }
+
+    /**
+     * @return object
+     */
+    protected function getCurrentUser()
+    {
         $em = $this->getDoctrine()->getManager();
         $id = $this->getUser()->getId();
         return $em->getRepository(User::class)->find($id);
     }
 
-    private function getCurrentUserHistory() {
+    /**
+     * @return object
+     */
+    protected function getCurrentUserHistory()
+    {
         $user = $this->getCurrentUser();
-        return $this->getDoctrine()->getRepository(UserHistory::class)->findOneBy(['user' => $user->getId()]);
+        return $this->getDoctrine()->getRepository(UserHistory::class)->findOneBy([Consts::USER => $user->getId()]);
+    }
+
+    private function getFilteredItemsByGenre($genre, $items)
+    {
+        $filteredItems = array();
+
+        $lowGenry = mb_strtolower($genre); // TODO: сделать получше и зарефакторить, при больших данных будет долго искать
+        foreach ($items as $item) {
+            $itemGenries = $item->getGenries();
+
+            if (strpos($itemGenries, $lowGenry) !== false) {
+                array_push($filteredItems, $item);
+            }
+        }
+
+        return $filteredItems;
     }
 }

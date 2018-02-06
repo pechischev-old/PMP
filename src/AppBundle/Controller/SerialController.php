@@ -13,8 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class SerialController extends Controller
 {
     public function removeData($id, &$em) {
-        //$data = $em->getRepository(SerialData::class)->find($id);
-
         $userData = $em->getRepository(UserSerialData::class)->findOneBy(['serialData' => $id]);
 
         $seasons = $userData->getUserSeason();

@@ -9,6 +9,7 @@ use AppBundle\Form\FormValidate;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserHistory;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use AppBundle\Constant\TwigPath;
 
 class SecurityController extends Controller {
 
@@ -39,7 +40,7 @@ class SecurityController extends Controller {
             $this->get('security.token_storage')->setToken($token);
             return $this->redirectToRoute(self::HOMEPAGE);
         }
-        return $this->render('inputForm/registry.html.twig', [
+        return $this->render(TwigPath::REGISTERY_FORM, [
             'form' => $form->createView()
         ]);
     }
@@ -52,7 +53,7 @@ class SecurityController extends Controller {
         $authenticationUtils = $this->get('security.authentication_utils');
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
-        return $this->render('inputForm/login.html.twig', [
+        return $this->render(TwigPath::LOGIN_FORM, [
                 'last_username' => $lastUsername,
                 'error'         => $error,
             ]
