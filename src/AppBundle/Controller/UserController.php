@@ -5,16 +5,17 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserHistory;
 use Doctrine\DBAL\Types\IntegerType;
-use Symfony\Component\HttpFoundation\Response;
+
 use Doctrine\ORM\EntityManagerInterface;
 
 use AppBundle\Constant\Genry;
 use AppBundle\Controller\SerialController;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends Controller
 {
@@ -66,18 +67,23 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/series/{id}", name="update_state_series", requirements={"id" = "\d+"})
+     * @Route("/series", name="update_state_series")
      */
-    public function updateViewedSeriesState(Request $request, $id) {
-        $em = $this->getDoctrine()->getManager();
+    public function updateViewedSeriesState(Request $request) {
+        $id = $request->request->get('id');
+        if ($id)
+        {
+            $em = $this->getDoctrine()->getManager();
+            $series = $this->getDoctrine()->getRepository(User\UserSeries::class)->find($id);
 
-        $series = $this->getDoctrine()->getRepository(User\UserSeries::class)->find($id);
-        $series->setVisible(!$series->getVisible());
+            $state = !$series->getVisible();
+            $series->setVisible($state);
 
-        $parentId = $series->getSeason()->getId();
-        $em->flush();
+            $em->flush();
+            return new Response((int)$state);
+        }
 
-        return $this->redirectToRoute('season_page', array("id" => $parentId));
+        return new Response();
     }
 
     /**

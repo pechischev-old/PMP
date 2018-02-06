@@ -26,7 +26,6 @@ class DefaultController extends Controller
     {
         $items = $this->getDoctrine()->getRepository(SerialData::class)->findAll();
 
-        // replace this example code with whatever you need
         return $this->render('main/catalog.html.twig', [
 			'genries' => Genry::getGenries(),
             'titleName' => "Каталог",
@@ -45,13 +44,10 @@ class DefaultController extends Controller
 
         $serial = $this->getDoctrine()->getRepository(Serial::class)->findOneBy(['data' => $id]);
 
-        $user = $this->getCurrentUser();
         $hasItem = false;
-        if ($user)
+        if ($this->getUser())
         {
-            global $serialId;
-            $serialId = $id;
-            $hasItem = $this->getCurrentUserHistory()->hasSerial($serialId);
+            $hasItem = $this->getCurrentUserHistory()->hasSerial($id);
         }
 
         // replace this example code with whatever you need
