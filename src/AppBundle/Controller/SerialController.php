@@ -6,34 +6,64 @@ use AppBundle\Entity\SerialData;
 use AppBundle\Entity\User\UserSerialData;
 use AppBundle\Entity\User\UserSeason;
 use AppBundle\Entity\User\UserSeries;
+use AppBundle\Constant\Consts;
+use AppBundle\Controller\DefaultController;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class SerialController extends Controller
+class SerialController extends DefaultController
 {
-    public function removeData($id, &$em) {
-        $userData = $em->getRepository(UserSerialData::class)->findOneBy(['serialData' => $id]);
+    /**
+     * @Route("/item/add?id={id}", name="add_serial", requirements={"id" = "\d+"})
+     */
+    public function addSerialAction($id)
+    {
+        $history = $this->getCurrentUserHistory();
 
-        $seasons = $userData->getUserSeason();
-        foreach ($seasons as &$season) {
-            $series = $season->getSeries();
+        $data = $this->createUserSerialData($id);
+        $data->setHistory($history);
+        $history->addSerialDatum($data);
 
-            foreach ($series as &$item) {
-                $season->removeSeries($item);
-                $em->remove($item);
-            }
+        $this->getObjectManager()->flush();
 
-            $userData->removeUSerSeason($season);
-            $em->remove($season);
-        }
-
-        $em->remove($userData);
-        return $userData;
+        return $this->redirectToRoute('itempage', array(Consts::ID => $id));
     }
 
-    public function createUserSerialData($id, &$em) {
-        $data = $em->getRepository(SerialData::class)->find($id);
+    /**
+     * @Route("/item/remove?id={id}", name="remove_serial", requirements={"id" = "\d+"})
+     */
+    public function removeSerialAction($id)
+    {
+        $data = $this->getObjectManager()->getRepository(UserSerialData::class)->findOneBy(['serialData' => $id]);;
+        if ($data)
+        {
+            $seasons = $data->getUserSeason();
+            foreach ($seasons as &$season) {
+                $series = $season->getSeries();
+
+                foreach ($series as &$item) {
+                    $season->removeSeries($item);
+                    $this->getObjectManager()->remove($item);
+                }
+
+                $data->removeUSerSeason($season);
+                $this->getObjectManager()->remove($season);
+            }
+
+            $this->getObjectManager()->remove($data);
+
+            $history = $this->getCurrentUserHistory();
+            $history->removeSerialDatum($data);
+
+            $this->getObjectManager()->flush();
+        }
+
+        return $this->redirectToRoute('itempage', array(Consts::ID => $id));
+    }
+
+    private function createUserSerialData($id)
+    {
+        $data = $this->getObjectManager()->find(SerialData::class, $id);
 
         $userData = new UserSerialData();
         $userData->setViewStatus("не посмотрено");
@@ -41,37 +71,44 @@ class SerialController extends Controller
 
         $seasons = $data->getSeason();
         foreach ($seasons as &$season) {
-            $userData->addUserSeason($this->createUserSeason($season, $userData, $em));
+            $userData->addUserSeason($this->createUserSeason($season, $userData));
         }
 
-        $em->persist($userData);
+        $this->getObjectManager()->persist($userData);
         return $userData;
     }
 
-    private function createUserSeason($season, $data, $em) {
-        $userSeason = new UserSeason();
-        $userSeason->setSeason($season);
-        $userSeason->setVisibled(false);
-        $userSeason->setSerialData($data);
+    private function createUserSeason($seasonInfo, $data)
+    {
+        $season = new UserSeason();
+        $season->setSeason($seasonInfo);
+        $season->setVisibled(false);
+        $season->setSerialData($data);
 
         $series = $season->getSeries();
         foreach ($series as &$part) {
-            $userSeason->addSeries($this->createUserSeries($part, $userSeason, $em));
+            $season->addSeries($this->createUserSeries($part, $season));
         }
 
-        $em->persist($userSeason);
+        $this->getObjectManager()->persist($season);
 
-        return $userSeason;
+        return $season;
     }
 
-    private function createUserSeries($series, $season, $em) {
-        $userSeries = new UserSeries();
-        $userSeries->setSeries($series);
-        $userSeries->setVisible(false);
-        $userSeries->setSeason($season);
+    private function createUserSeries($seriesInfo, $season)
+    {
+        $series = new UserSeries();
+        $series->setSeries($seriesInfo);
+        $series->setVisible(false);
+        $series->setSeason($season);
 
-        $em->persist($userSeries);
+        $this->getObjectManager()->persist($series);
 
-        return $userSeries;
+        return $series;
+    }
+
+    private function getObjectManager()
+    {
+        return $this->getDoctrine()->getManager();
     }
 }

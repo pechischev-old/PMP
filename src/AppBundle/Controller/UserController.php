@@ -6,12 +6,10 @@ use AppBundle\Entity\User;
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\Serial;
 use AppBundle\lng\Message;
-use Doctrine\DBAL\Types\IntegerType;
 use AppBundle\Constant\TwigPath;
 use AppBundle\Constant\Consts;
 use Doctrine\ORM\EntityManagerInterface;
 use AppBundle\Controller\DefaultController;
-use AppBundle\Controller\SerialController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,11 +19,6 @@ use \DateTime;
 
 class UserController extends DefaultController
 {
-    public function __construct()
-    {
-        $this->serialController = new SerialController();
-    }
-
     /**
      * @Route("/serials", name="serials")
      */
@@ -76,7 +69,6 @@ class UserController extends DefaultController
 
         if ($commentText && $id)
         {
-            $em = $this->getDoctrine()->getManager();
             $serial = $this->getDoctrine()->getRepository(Serial::class)->find($id);
 
             $comment = new Comment();
@@ -84,12 +76,9 @@ class UserController extends DefaultController
             $comment->setDate(new DateTime());
             $comment->setSerial($serial);
             $comment->setText($commentText);
-
             $serial->addComment($comment);
 
-            $em->persist($comment);
-
-            $em->flush();
+            $this->appendObjectToBaseData($comment);
 
             $data = array(
                 Consts::USERNAME => $comment->getUser()->getUsername(),
@@ -116,7 +105,7 @@ class UserController extends DefaultController
             $series->setVisible($state);
 
             $em->flush();
-            return new Response((int)$state);
+            return new JsonResponse(array("state" => $state));
         }
 
         return new Response();
@@ -135,40 +124,6 @@ class UserController extends DefaultController
             Consts::ITEMS_PARAM => $serialsData
         ];
         return $this->getResponseByParameters(TwigPath::SERIALS_VIEWED, $param);
-    }
-
-
-    /**
-     * @Route("/item/add?id={id}", name="add_serial", requirements={"id" = "\d+"})
-     */
-    public function addSerialAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $history = $this->getCurrentUserHistory();
-
-        $serialData = $this->serialController->createUserSerialData($id, $em);
-        $serialData->setHistory($history);
-        $history->addSerialDatum($serialData);
-
-        $em->flush();
-
-        return $this->redirectToRoute('itempage', array(Consts::ID => $id));
-    }
-
-    /**
-     * @Route("/item/remove?id={id}", name="remove_serial", requirements={"id" = "\d+"})
-     */
-    public function removeSerialAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $history = $this->getCurrentUserHistory();
-        $serialData = $this->serialController->removeData($id, $em);
-        $history->removeSerialDatum($serialData);
-        $em->flush();
-
-        return $this->redirectToRoute('itempage', array(Consts::ID => $id));
     }
 
     /**

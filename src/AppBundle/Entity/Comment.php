@@ -37,7 +37,7 @@ class Comment
      * @ORM\ManyToOne(targetEntity="Serial", inversedBy="comment")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $serial;
+    private $serialInfo;
 
     /**
      * Get id
@@ -100,13 +100,13 @@ class Comment
     /**
      * Set serial
      *
-     * @param \AppBundle\Entity\Serial $serial
+     * @param \AppBundle\Entity\Serial $serialInfo
      *
      * @return Comment
      */
-    public function setSerial(\AppBundle\Entity\Serial $serial = null)
+    public function setSerial(\AppBundle\Entity\Serial $serialInfo = null)
     {
-        $this->serial = $serial;
+        $this->serialInfo = $serialInfo;
 
         return $this;
     }
@@ -118,7 +118,7 @@ class Comment
      */
     public function getSerial()
     {
-        return $this->serial;
+        return $this->serialInfo;
     }
 
     /**

@@ -5,7 +5,7 @@ namespace AppBundle\Constant;
 class TwigPath
 {
     const CATALOG = 'main/catalog.html.twig';
-    const SERIAL_VIEW = 'itemPage/itemPage.html.twig';
+    const SERIAL_VIEW = 'main/serialInfo.html.twig';
     const SEASON_VIEW = "user/seasonPage.html.twig";
 
     const SERIALS_VIEW = 'user/serials.html.twig';

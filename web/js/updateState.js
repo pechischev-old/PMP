@@ -8,9 +8,9 @@ $(document).ready(() => {
         const state = $(icon).hasClass("user-item__visible-icon_active");
         $(icon).toggleClass("user-item__visible-icon_active", !state);
         $.post(baseUrl + "series", {id: dataId}, (data) => {
-            if (data == undefined)
+            if (data)
             {
-                $(icon).toggleClass("user-item__visible-icon_active", state);
+                $(icon).toggleClass("user-item__visible-icon_active", data.state);
                 return;
             }
         });

@@ -111,6 +111,26 @@ class DefaultController extends Controller
         return $this->getDoctrine()->getRepository(UserHistory::class)->findOneBy([Consts::USER => $user->getId()]);
     }
 
+    /**
+     * @param $object
+     */
+    protected function appendObjectToBaseData($object)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($object);
+        $em->flush();
+    }
+
+    /**
+     * @param $object
+     */
+    protected function removeObjectFromBaseData($object)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($object);
+        $em->flush();
+    }
+
     private function getFilteredItemsByGenre($genre, $items)
     {
         $filteredItems = array();

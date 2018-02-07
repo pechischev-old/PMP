@@ -33,7 +33,7 @@ class Serial {
     private $actors;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="serial")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="serialInfo")
      */
     private $comments;
 
