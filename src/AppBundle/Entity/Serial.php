@@ -33,6 +33,11 @@ class Serial {
     private $actors;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="serial")
+     */
+    private $comments;
+
+    /**
      * Get id
      *
      * @return integer
@@ -184,5 +189,46 @@ class Serial {
     public function getData()
     {
         return $this->data;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     *
+     * @return Serial
+     */
+    public function addComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     */
+    public function removeComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

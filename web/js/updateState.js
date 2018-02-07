@@ -4,12 +4,15 @@ $(document).ready(() => {
         const dataId = icon.getAttribute("data-id");
         const positionToUrl = (location.href).indexOf("season");
         const baseUrl = (location.href).substring(0, positionToUrl);
-        $.post(baseUrl + "series", {id: dataId}, function (state) {
-            if (state == undefined)
+
+        const state = $(icon).hasClass("user-item__visible-icon_active");
+        $(icon).toggleClass("user-item__visible-icon_active", !state);
+        $.post(baseUrl + "series", {id: dataId}, (data) => {
+            if (data == undefined)
             {
+                $(icon).toggleClass("user-item__visible-icon_active", state);
                 return;
             }
-            $(icon).toggleClass("user-item__visible-icon_active", state);
         });
     });
 });

@@ -150,8 +150,36 @@
     border-radius: 5px; }
     .item-page .tags-list__tag:hover {
       background: #DADADA; }
-.item-page .request-block {
-  display: none; }
+.item-page .comment-block {
+  margin-top: 20px;
+  padding-left: 0; }
+  .item-page .comment-block .form-group {
+    margin-top: 20px; }
+    .item-page .comment-block .form-group textarea {
+      padding: 15px;
+      height: 145px; }
+  .item-page .comment-block .delimeter {
+    border-color: #EEEEEE;
+    opacity: 0.6; }
+.item-page .comment-list {
+  margin-top: 20px; }
+  .item-page .comment-list__comment-item {
+    margin: 10px 0;
+    padding-left: 0; }
+.item-page .user__icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: grey;
+  float: left;
+  margin-right: 10px; }
+.item-page .user__name {
+  font-weight: bold; }
+  .item-page .user__name span {
+    font-weight: normal;
+    font-style: italic; }
+.item-page .text-container {
+  padding-left: 80px; }
 
 .items .item-block {
   margin-bottom: 10px;

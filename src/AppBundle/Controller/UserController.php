@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Entity\Comment;
+use AppBundle\Entity\Serial;
 use AppBundle\lng\Message;
 use Doctrine\DBAL\Types\IntegerType;
 use AppBundle\Constant\TwigPath;
@@ -10,9 +12,12 @@ use AppBundle\Constant\Consts;
 use Doctrine\ORM\EntityManagerInterface;
 use AppBundle\Controller\DefaultController;
 use AppBundle\Controller\SerialController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
+use \DateTime;
 
 class UserController extends DefaultController
 {
@@ -59,6 +64,41 @@ class UserController extends DefaultController
         ];
 
         return $this->getResponseByParameters(TwigPath::SEASON_VIEW, $param);
+    }
+
+    /**
+     * @Route("/sendcomment", name="save_comment")
+     */
+    public function sendComment(Request $request)
+    {
+        $commentText = $request->request->get(Consts::COMMENT);
+        $id = $request->request->get(Consts::ID);
+
+        if ($commentText && $id)
+        {
+            $em = $this->getDoctrine()->getManager();
+            $serial = $this->getDoctrine()->getRepository(Serial::class)->find($id);
+
+            $comment = new Comment();
+            $comment->setUser($this->getCurrentUser());
+            $comment->setDate(new DateTime());
+            $comment->setSerial($serial);
+            $comment->setText($commentText);
+
+            $serial->addComment($comment);
+
+            $em->persist($comment);
+
+            $em->flush();
+
+            $data = array(
+                Consts::USERNAME => $comment->getUser()->getUsername(),
+                Consts::COMMENT => $commentText,
+                Consts::DATE => $comment->getDate()->format("d.m.Y"),
+            );
+            return new JsonResponse($data);
+        }
+        return new Response();
     }
 
     /**

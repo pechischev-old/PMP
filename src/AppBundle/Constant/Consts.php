@@ -18,4 +18,8 @@ class Consts
     const ID = "id";
     const DATA = "data";
     const USER = "user";
+    const COMMENT = "text";
+
+    const DATE = "date";
+    const USERNAME = "username";
 }
