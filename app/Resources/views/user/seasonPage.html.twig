@@ -21,7 +21,7 @@
                     {% if series.getVisible() %}
                         {% set visibled = 'user-item__visible-icon_active' %}
                     {% endif %}
-                    <div class="user-item__visible-icon {{ visibled }}" data-id="{{ series.getId() }}"></div>
+                    <div class="user-item__visible-icon {{ visibled }}" data-id="{{ series.getId() }}" data-parentId="{{ season.getSerialData().getId() }}"></div>
                     <div class="user-item__description">Серия {{ series.getSeries().getName() }} </div>
                 </div>
             {% endfor %}

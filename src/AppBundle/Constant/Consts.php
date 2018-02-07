@@ -22,4 +22,6 @@ class Consts
 
     const DATE = "date";
     const USERNAME = "username";
+
+    const EXPIRY_DATE = 5184000;
 }

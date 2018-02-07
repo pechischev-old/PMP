@@ -37,6 +37,12 @@ class UserSerialData
      * @ORM\JoinColumn(nullable=true)
      */
     private $history;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateLastChange;
+
     /**
      * Constructor
      */
@@ -167,5 +173,29 @@ class UserSerialData
     public function getSerialData()
     {
         return $this->serialData;
+    }
+
+    /**
+     * Set dateLastChange
+     *
+     * @param \DateTime $dateLastChange
+     *
+     * @return UserSerialData
+     */
+    public function setDateLastChange($dateLastChange)
+    {
+        $this->dateLastChange = $dateLastChange;
+
+        return $this;
+    }
+
+    /**
+     * Get dateLastChange
+     *
+     * @return \DateTime
+     */
+    public function getDateLastChange()
+    {
+        return $this->dateLastChange;
     }
 }

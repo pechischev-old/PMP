@@ -12,6 +12,7 @@ class Message
     const VIEWED_TITLE = "Просмотренные";
 
     const LOOKED_STATUS = "посмотрено";
-    const NOT_VIEWED_STATUS = "не посмотрено";
+    const NOT_VIEWED_STATUS = "планирую смотреть";
     const WATCH_STATUS = "смотрю";
+    const STOPPED_WATCH_STATUS = "приостановлено";
 }

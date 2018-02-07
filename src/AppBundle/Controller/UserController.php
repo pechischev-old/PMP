@@ -91,37 +91,18 @@ class UserController extends DefaultController
     }
 
     /**
-     * @Route("/series", name="update_state_series")
-     */
-    public function updateViewedSeriesState(Request $request)
-    {
-        $id = $request->request->get(Consts::ID);
-        if ($id)
-        {
-            $em = $this->getDoctrine()->getManager();
-            $series = $this->getDoctrine()->getRepository(User\UserSeries::class)->find($id);
-
-            $state = !$series->getVisible();
-            $series->setVisible($state);
-
-            $em->flush();
-            return new JsonResponse(array("state" => $state));
-        }
-
-        return new Response();
-    }
-
-    /**
      * @Route("/user/viewed", name="viewed")
      */
     public function getViewedSerials(Request $request)
     {
         $history = $this->getCurrentUserHistory();
-        $serialsData = $history->getSerialData()->getValues();
+        $serials = $history->getSerialData()->getValues();
+
+        $this->updateSerialsViewStatus($serials);
 
         $param = [
             Consts::TITLE_PARAM => Message::VIEWED_TITLE,
-            Consts::ITEMS_PARAM => $serialsData
+            Consts::ITEMS_PARAM => $serials,
         ];
         return $this->getResponseByParameters(TwigPath::SERIALS_VIEWED, $param);
     }
@@ -132,5 +113,29 @@ class UserController extends DefaultController
     public function getTimetable(Request $request)
     {
         return $this->getResponseByParameters(TwigPath::TIMETABLE, [Consts::TITLE_PARAM => Message::TIMETABLE_TITLE]);
+    }
+
+    /**
+     * @param array $serials
+     */
+    private function updateSerialsViewStatus($serials)
+    {
+        $currentDate = new DateTime();
+        foreach ($serials as $serial)
+        {
+
+            $date = $serial->getDateLastChange();
+            if (is_null($date))
+            {
+                continue;
+            }
+            $interval = $currentDate->getTimestamp() - $date->getTimestamp();
+            if ($interval >= Consts::EXPIRY_DATE)
+            {
+                $serial->setViewStatus(Message::STOPPED_WATCH_STATUS);
+            }
+        }
+
+        $this->getObjectManager()->flush();
     }
 }

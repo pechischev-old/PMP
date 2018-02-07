@@ -1,18 +1,22 @@
 $(document).ready(() => {
     $(".user-item__visible-icon").click((event) => {
         const icon = event.target;
-        const dataId = icon.getAttribute("data-id");
+        const seriesId = icon.getAttribute("data-id");
+        const dataId = icon.getAttribute("data-parentId");
         const positionToUrl = (location.href).indexOf("season");
         const baseUrl = (location.href).substring(0, positionToUrl);
 
-        const state = $(icon).hasClass("user-item__visible-icon_active");
-        $(icon).toggleClass("user-item__visible-icon_active", !state);
-        $.post(baseUrl + "series", {id: dataId}, (data) => {
+        const className = "user-item__visible-icon_active";
+
+        const state = $(icon).hasClass(className);
+        $(icon).toggleClass(className, !state);
+        $.post(baseUrl + "serial/updateStatusSeries", {id: seriesId}, (data) => {
             if (data)
             {
-                $(icon).toggleClass("user-item__visible-icon_active", data.state);
-                return;
+                $(icon).toggleClass(className, data.state);
             }
         });
+
+        $.post(baseUrl + "serial/updateStatus", {id: dataId});
     });
 });

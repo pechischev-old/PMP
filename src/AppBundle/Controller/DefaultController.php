@@ -131,6 +131,14 @@ class DefaultController extends Controller
         $em->flush();
     }
 
+    /**
+     * @return \Doctrine\Common\Persistence\ObjectManager
+     */
+    protected function getObjectManager()
+    {
+        return $this->getDoctrine()->getManager();
+    }
+
     private function getFilteredItemsByGenre($genre, $items)
     {
         $filteredItems = array();
