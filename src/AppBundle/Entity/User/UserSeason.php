@@ -34,7 +34,7 @@ class UserSeason
     private $visibled;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Season")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Season", inversedBy="userSeason")
      */
     private $season;
     /**

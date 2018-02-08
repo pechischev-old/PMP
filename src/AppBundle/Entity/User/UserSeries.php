@@ -23,7 +23,7 @@ class UserSeries
     private $visible;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Series")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Series", inversedBy="userSeries")
      */
     private $series;
 

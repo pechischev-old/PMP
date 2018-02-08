@@ -84,6 +84,7 @@ class UserController extends DefaultController
                 Consts::USERNAME => $comment->getUser()->getUsername(),
                 Consts::COMMENT => $commentText,
                 Consts::DATE => $comment->getDate()->format("d.m.Y"),
+                Consts::CAPTURE => $comment->getUser()->getCapture(),
             );
             return new JsonResponse($data);
         }

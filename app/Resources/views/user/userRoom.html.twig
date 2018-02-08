@@ -2,32 +2,55 @@
 
 {% extends "layout.html.twig" %}
 
-{% block mainContentStyle %}user-room{% endblock %}
+{% block javascript %}
+<script type="text/javascript" src="{{ asset('js/loadImage.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/saveSettings.js') }}"></script>
+{% endblock %}
+
+{% block mainContentStyle %}settings{% endblock %}
 
 {% block mainContent %}
 <div class="items-container col-md-12">
     <div class="settings">
         <div class="input-form">
-            <form class="form-horizontal">
-                <div class="">
+            <div class="form-horizontal">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <div class="col-md-6">
-                            <label>Имя</label>
-                            <input class="form-control" id="name">
+                        <div class="col-md-12">
+                            <label class="form-group__form-item">Имя:</label>
+                            <input type="text" class="form-control" name="first-name" id="first-name" value="{{ app.user.firstName }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="form-group__form-item">Фамилия:</label>
+                            <input type="text" class="form-control" name="last-name" id="last-name" value="{{ app.user.lastName }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="form-group__form-item">Email:</label>
+                            <input type="email" class="form-control" name="email" id="email" value="{{ app.user.email }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label class="form-group__form-item">Пароль:</label>
+                            <input type="password" class="form-control" name="password" id="password" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-button col-md-12">
+                            <button class="btn btn-primary" id="save-settings" >Сохранить</button>
                         </div>
                     </div>
                 </div>
-                <div class="image-loader">
-                    <div class="image-loader__image"></div>
-                    <div class="image-loader__description">загрузить аватар</div>
+                <div class="image-loader col-md-6">
+                    <div class="image-loader__image" style="background-image: url('{{ app.user.capture }}')"></div>
+                    <input type="file" class="image-loader__description" class="image-loader__description" id="fileReader">
+                    <div class="image-loader__description" id="load">загрузить аватар</div>
                 </div>
-
-                <div class="form-group">
-                    <div class="input-button col-md-12">
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

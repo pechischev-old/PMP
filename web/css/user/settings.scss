@@ -1,0 +1,37 @@
+.settings {
+  padding-left: 0;
+
+  .items-container {
+    padding-left: 0;
+  }
+
+  .image-loader {
+    padding: 10px;
+    text-align: center;
+
+    &__image {
+      width: 300px;
+      height: 350px;
+      border-radius: 4px;
+      margin: auto;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #DDDDDD;
+    }
+
+    &__description {
+      margin: auto;
+      margin-top: 10px;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+    input {
+      display: none;
+    }
+  }
+}

@@ -146,7 +146,7 @@ class SerialController extends DefaultController
         $season->setVisibled(false);
         $season->setSerialData($data);
 
-        $series = $season->getSeries();
+        $series = $seasonInfo->getSeries();
         foreach ($series as &$part) {
             $season->addSeries($this->createUserSeries($part, $season));
         }

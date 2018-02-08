@@ -2,18 +2,22 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Constant\Consts;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Form\FormValidate;
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserHistory;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use AppBundle\Constant\TwigPath;
+use AppBundle\Controller\UserController;
 
-class SecurityController extends Controller {
+class SecurityController extends UserController {
 
     const HOMEPAGE = 'homepage';
+    const SETTINGS_PAGE = 'settings';
+
     const SECURITY_FIREWALL = 'main';
     const LAST_USERNAME_PARAM = 'last_username';
     const ERROR_PARAM = 'error';
@@ -32,17 +36,63 @@ class SecurityController extends Controller {
             $password = $this->get('security.password_encoder')
                 ->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->persist($this->createUserHistory($user));
-            $em->flush();
+            $user->setCapture(Consts::DEFAULT_USER_ICON);
+
+            $this->appendObjectToBaseData($user);
+            $this->appendObjectToBaseData($this->createUserHistory($user));
+
             $token = new UsernamePasswordToken($user, null, self::SECURITY_FIREWALL, $user->getRoles());
             $this->get('security.token_storage')->setToken($token);
             return $this->redirectToRoute(self::HOMEPAGE);
         }
         return $this->render(TwigPath::REGISTERY_FORM, [
-            'form' => $form->createView()
+            self::FORM_PARAM => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/settings/save", name="saveSettings")
+     */
+    public function saveSettings(Request $request)
+    {
+        $currentUser = $this->getCurrentUser();
+
+        if ($request->isMethod('POST'))
+        {
+
+            $currentUser->setFirstName($request->request->get('firstName'));
+            $currentUser->setLastName($request->request->get('lastName'));
+            $imageData = $request->request->get('icon');
+            if ($imageData)
+            {
+                $currentUser->setCapture($imageData);
+            }
+
+            $email = $request->request->get('email');
+            if ($email !== $currentUser->getEmail() && $email)
+            {
+                $currentUser->setEmail($email);
+            }
+            $password = $request->request->get('password');
+            if ($password)
+            {
+                $password = $this->get('security.password_encoder')
+                    ->encodePassword($currentUser, $password);
+                if ($password != $currentUser->getPassword())
+                {
+                    $currentUser->setPassword($password);
+                }
+            }
+
+            $this->getObjectManager()->flush();
+        }
+        $json = array(
+            "firstName" => $currentUser->getFirstName(),
+            "lastName" => $currentUser->getLastName(),
+            "email" => $currentUser->getEmail(),
+            "capture" => $currentUser->getCapture(),
+        );
+        return new JsonResponse($json);
     }
 
     /**
@@ -54,8 +104,8 @@ class SecurityController extends Controller {
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
         return $this->render(TwigPath::LOGIN_FORM, [
-                'last_username' => $lastUsername,
-                'error'         => $error,
+                self::LAST_USERNAME_PARAM => $lastUsername,
+                self::ERROR_PARAM => $error,
             ]
         );
     }

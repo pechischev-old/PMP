@@ -13,7 +13,7 @@
             <div class="user-block">
                 {% if app.user %}
                     <div class="user-block_registry user">
-                        <div class="user__icon"></div>
+                        <div class="user__icon" style="background-image: url('{{ app.user.capture }}')"></div>
 
                         <div class="btn-group">
                             <button type="button" class="btn dropdown-toggle user__button" data-toggle="dropdown">
@@ -21,7 +21,7 @@
                                 <span class="caret"></span>
                             </button>
                             <ul class="user__dropdown-menu dropdown-menu" role="menu">
-                                <li><a href="#">Личный кабинет</a></li>
+                                <li><a href="{{ path("settings") }}">Личный кабинет</a></li>
                                 <li><a href="#">Оповещения</a></li>
                                 <li class="divider"></li>
                                 <li><a href="{{ logout_path('main') }}">Выход</a></li>

@@ -42,7 +42,10 @@
     height: 40px;
     border-radius: 50%;
     overflow: hidden;
-    background: grey; }
+    background: grey;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; }
   .header .user__name {
     float: left;
     padding-right: 7px;
@@ -172,7 +175,10 @@
   border-radius: 50%;
   background: grey;
   float: left;
-  margin-right: 10px; }
+  margin-right: 10px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; }
 .item-page .user__name {
   font-weight: bold; }
   .item-page .user__name span {
@@ -292,6 +298,31 @@
     margin-top: 7px; }
   .serials .season:hover {
     opacity: 0.65; }
+
+.settings {
+  padding-left: 0; }
+  .settings .items-container {
+    padding-left: 0; }
+  .settings .image-loader {
+    padding: 10px;
+    text-align: center; }
+    .settings .image-loader__image {
+      width: 300px;
+      height: 350px;
+      border-radius: 4px;
+      margin: auto;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #DDDDDD; }
+    .settings .image-loader__description {
+      margin: auto;
+      margin-top: 10px;
+      cursor: pointer; }
+      .settings .image-loader__description:hover {
+        opacity: 0.7; }
+    .settings .image-loader input {
+      display: none; }
 
 html {
   height: 100%; }

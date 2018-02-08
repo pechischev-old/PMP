@@ -80,7 +80,10 @@
             border-radius: 50%;
             background: grey;
             float: left;
-            margin-right: $ICON_MARGIN_RIGHT
+            margin-right: $ICON_MARGIN_RIGHT;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
         }
 
         &__name {

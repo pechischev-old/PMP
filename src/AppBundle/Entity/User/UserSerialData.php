@@ -28,7 +28,7 @@ class UserSerialData
     private $userSeason;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\SerialData")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\SerialData", inversedBy="userSerialData")
      */
     private $serialData;
 
