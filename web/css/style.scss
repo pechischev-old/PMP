@@ -1,13 +1,12 @@
-$MIN_HEIGHT: 100%;
-$HEADER_HEIGHT: 70px;
-$FOOTER_HEIGHT: 41px;
+@import "utils";
 
-@import "header.scss";
-@import "sidebar.scss";
-@import "content.scss";
-@import "catalog/catalog.scss";
-@import "itemPage/item_page.scss";
+@import "header";
+@import "sidebar";
+@import "content";
+@import "catalog/catalog";
+@import "catalog/serialInfo";
 @import "user/user_styles";
+@import "admin/createSerial";
 
 html {
     height: 100%;
@@ -17,14 +16,6 @@ body {
     min-height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     user-select: none;
-}
-
-a, a:hover, a:focus {
-    text-decoration: none;
-}
-
-.delimeter {
-    border: 1px solid #D8D6D6;
 }
 
 .main-container {

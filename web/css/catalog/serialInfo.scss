@@ -44,7 +44,6 @@
 
     .comment-block {
         margin-top: 20px;
-        padding-left: 0;
 
         .form-group {
             margin-top: 20px;
@@ -54,11 +53,6 @@
                 height: 145px;
             }
         }
-
-        .delimeter {
-            border-color: #EEEEEE;
-            opacity: 0.6;
-        }
     }
 
     .comment-list {
@@ -66,7 +60,6 @@
 
         &__comment-item {
             margin: 10px 0;
-            padding-left: 0;
         }
     }
 
@@ -75,15 +68,9 @@
 
     .user {
         &__icon {
-            width: $ICON_SIZE;
-            height: $ICON_SIZE;
-            border-radius: 50%;
-            background: grey;
-            float: left;
+            @include applyRoundIcon($ICON_SIZE);
+
             margin-right: $ICON_MARGIN_RIGHT;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
         }
 
         &__name {

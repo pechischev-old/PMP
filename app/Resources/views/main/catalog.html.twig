@@ -5,12 +5,12 @@
 {% block mainContentStyle %}catalog{% endblock %}
 
 {% block mainContent %}
-<div class="items-container">
+<div class="items-container not-left-indent">
     {% for item in itemsData %}
         {%  if item %}
         <div class="item col-md-2">
             <a href="{{ path('itempage', {'id': item.id}) }}" class="item__image-container">
-                <img class="" width="142" height="220" />
+                <img class="clickable" width="142" height="220"/>
             </a>
             <div class="description_container">
                 <div class="item__title col-md-12">{{ item.title }}</div>

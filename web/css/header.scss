@@ -48,19 +48,15 @@
         }
 
         &__search-icon {
+            $ICON_SIZE: 25px;
+
             right: 8px;
             top: 5px;
             position: absolute;
-            height: 25px;
-            width: 25px;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
-            cursor: pointer;
+            height: $ICON_SIZE;
+            width: $ICON_SIZE;
 
-            &:hover {
-                opacity: 0.7;
-            }
+            @include imageLocation();
         }
     }
 
@@ -91,15 +87,9 @@
 
     .user {
         &__icon {
-            float: left;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            @include applyRoundIcon(40px);
+
             overflow: hidden;
-            background: grey;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
         }
 
         &__name {

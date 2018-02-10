@@ -1,3 +1,27 @@
+a, a:hover, a:focus {
+  text-decoration: none; }
+
+.delimeter {
+  border: 1px solid #D8D6D6; }
+  .delimeter_light {
+    margin: 15px 0;
+    border: 1px solid #EEEEEE;
+    opacity: 0.6; }
+
+.list {
+  display: inline-block; }
+  .list__item {
+    position: relative;
+    display: inline-block; }
+
+.clickable {
+  cursor: pointer; }
+  .clickable:hover {
+    opacity: 0.7; }
+
+.not-left-indent {
+  padding-left: 0; }
+
 .header {
   height: 70px;
   background: #4A4A4A;
@@ -37,12 +61,9 @@
       position: absolute;
       height: 25px;
       width: 25px;
+      background-size: cover;
       background-repeat: no-repeat;
-      background-position: center;
-      background-size: contain;
-      cursor: pointer; }
-      .header .search-block__search-icon:hover {
-        opacity: 0.7; }
+      background-position: center; }
   .header .user-block {
     float: right; }
     .header .user-block__text {
@@ -59,15 +80,15 @@
       float: left;
       padding: 8px 5px; }
   .header .user__icon {
-    float: left;
     width: 40px;
     height: 40px;
+    float: left;
     border-radius: 50%;
-    overflow: hidden;
     background: grey;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center; }
+    background-position: center;
+    overflow: hidden; }
   .header .user__name {
     float: left;
     padding-right: 7px;
@@ -132,8 +153,7 @@
     font-size: 15px;
     text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nowrap;
-    padding-left: 0; }
+    white-space: nowrap; }
   .content .items-container .item__year {
     text-align: left;
     font-size: 12px;
@@ -176,31 +196,26 @@
     .item-page .tags-list__tag:hover {
       background: #DADADA; }
 .item-page .comment-block {
-  margin-top: 20px;
-  padding-left: 0; }
+  margin-top: 20px; }
   .item-page .comment-block .form-group {
     margin-top: 20px; }
     .item-page .comment-block .form-group textarea {
       padding: 15px;
       height: 145px; }
-  .item-page .comment-block .delimeter {
-    border-color: #EEEEEE;
-    opacity: 0.6; }
 .item-page .comment-list {
   margin-top: 20px; }
   .item-page .comment-list__comment-item {
-    margin: 10px 0;
-    padding-left: 0; }
+    margin: 10px 0; }
 .item-page .user__icon {
   width: 70px;
   height: 70px;
+  float: left;
   border-radius: 50%;
   background: grey;
-  float: left;
-  margin-right: 10px;
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center; }
+  background-position: center;
+  margin-right: 10px; }
 .item-page .user__name {
   font-weight: bold; }
   .item-page .user__name span {
@@ -210,17 +225,11 @@
   padding-left: 80px; }
 
 .items .item-block {
-  margin-bottom: 10px;
-  padding-left: 0; }
+  margin-bottom: 10px; }
   .items .item-block__title {
     margin-bottom: 8px;
     font-size: 20px; }
-  .items .item-block__items-list {
-    display: inline-block;
-    margin-bottom: 6px; }
 .items .user-item {
-  position: relative;
-  display: inline-block;
   margin-right: 15px;
   margin-top: 10px; }
   .items .user-item__icon {
@@ -282,8 +291,6 @@
     padding: 12px 15px;
     vertical-align: middle;
     text-align: center; }
-    .viewed .column.name {
-      padding-left: 0; }
     .viewed .column.count {
       padding-left: 8px; }
   .viewed .table .col, .viewed th {
@@ -292,8 +299,7 @@
     text-align: left; }
 
 .serials .serial-block {
-  margin-bottom: 10px;
-  padding-left: 0; }
+  margin-bottom: 10px; }
   .serials .serial-block::after {
     content: "";
     border-bottom: 1px solid #eee;
@@ -303,10 +309,8 @@
     margin-bottom: 8px;
     font-size: 20px; }
   .serials .serial-block__seasons {
-    display: inline-block;
     margin-bottom: 6px; }
 .serials .season {
-  display: inline-block;
   margin-right: 15px;
   margin-top: 10px; }
   .serials .season__icon {
@@ -321,30 +325,62 @@
   .serials .season:hover {
     opacity: 0.65; }
 
-.settings {
+.settings .image-loader {
+  padding: 10px;
+  text-align: center; }
+  .settings .image-loader__image {
+    width: 300px;
+    height: 350px;
+    border-radius: 4px;
+    margin: auto;
+    background-color: #DDDDDD;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; }
+  .settings .image-loader__description {
+    margin: auto;
+    margin-top: 10px; }
+  .settings .image-loader input {
+    display: none; }
+
+.create-serial .form-horizontal {
   padding-left: 0; }
-  .settings .items-container {
-    padding-left: 0; }
-  .settings .image-loader {
-    padding: 10px;
-    text-align: center; }
-    .settings .image-loader__image {
-      width: 300px;
-      height: 350px;
-      border-radius: 4px;
-      margin: auto;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-color: #DDDDDD; }
-    .settings .image-loader__description {
-      margin: auto;
-      margin-top: 10px;
-      cursor: pointer; }
-      .settings .image-loader__description:hover {
-        opacity: 0.7; }
-    .settings .image-loader input {
-      display: none; }
+  .create-serial .form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0; }
+.create-serial textarea {
+  resize: none !important; }
+.create-serial .serial-info .image-container {
+  width: 300px;
+  position: relative;
+  display: inline;
+  float: left; }
+.create-serial .serial-info .image {
+  width: 100%;
+  height: 450px;
+  background: grey; }
+.create-serial .seasons .add-button {
+  display: inline;
+  font-size: 18px;
+  margin-bottom: 20px; }
+  .create-serial .seasons .add-button__icon {
+    position: relative;
+    top: -1px;
+    width: 20px;
+    margin-left: 10px; }
+.create-serial .season-info {
+  margin: 10px 0; }
+  .create-serial .season-info__icon {
+    width: 120px;
+    height: 130px;
+    display: inline;
+    float: left;
+    background: grey; }
+  .create-serial .season-info .empty-input {
+    border: none;
+    outline: none; }
+    .create-serial .season-info .empty-input:hover, .create-serial .season-info .empty-input:focus {
+      outline: 1px solid #8bb7ec; }
 
 html {
   height: 100%; }
@@ -353,12 +389,6 @@ body {
   min-height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   user-select: none; }
-
-a, a:hover, a:focus {
-  text-decoration: none; }
-
-.delimeter {
-  border: 1px solid #D8D6D6; }
 
 .main-container {
   position: absolute;

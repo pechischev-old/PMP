@@ -1,0 +1,66 @@
+.create-serial {
+
+  .form-horizontal {
+    padding-left: 0;
+
+    .form-group {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  textarea {
+    resize: none !important;
+  }
+
+  .serial-info {
+    .image-container {
+      width: 300px;
+      position: relative;
+      display: inline;
+      float: left;
+    }
+
+    .image {
+      width: 100%;
+      height: 450px;
+      background: grey;
+    }
+  }
+
+  .seasons {
+    .add-button {
+      display: inline;
+      font-size: 18px;
+      margin-bottom: 20px;
+
+      &__icon {
+        position: relative;
+        top: -1px;
+        width: 20px;
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .season-info{
+    margin: 10px 0;
+
+    &__icon {
+      width: 120px;
+      height: 130px;
+      display: inline;
+      float: left;
+      background: grey;
+    }
+
+    .empty-input {
+      border: none;
+      outline: none;
+
+      &:hover, &:focus {
+        outline: 1px solid #8bb7ec;
+      }
+    }
+  }
+}

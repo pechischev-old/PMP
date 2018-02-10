@@ -1,0 +1,55 @@
+$MIN_HEIGHT: 100%;
+$HEADER_HEIGHT: 70px;
+$FOOTER_HEIGHT: 41px;
+
+@mixin imageLocation() {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+@mixin applyRoundIcon($size) {
+    width: $size;
+    height: $size;
+    float: left;
+    border-radius: 50%;
+    background: grey;
+
+    @include imageLocation();
+}
+
+a, a:hover, a:focus {
+    text-decoration: none;
+}
+
+.delimeter {
+    border: 1px solid #D8D6D6;
+
+
+    &_light {
+        margin: 15px 0;
+        border: 1px solid #EEEEEE;
+        opacity: 0.6;
+    }
+}
+
+.list {
+    display: inline-block;
+
+    &__item {
+        position: relative;
+        display: inline-block;
+    }
+}
+
+.clickable {
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+.not-left-indent {
+    padding-left: 0;
+}
