@@ -35,6 +35,11 @@ class SerialData
     private $year;
 
     /**
+     * @ORM\Column(type="text", length=4294967295, nullable=true)
+     */
+    private $capture;
+
+    /**
      * @ORM\Column(type="integer", length=4, nullable=true)
      */
     private $endYear;
@@ -242,5 +247,29 @@ class SerialData
     public function getSeason()
     {
         return $this->season;
+    }
+
+    /**
+     * Set capture
+     *
+     * @param string $capture
+     *
+     * @return SerialData
+     */
+    public function setCapture($capture)
+    {
+        $this->capture = $capture;
+
+        return $this;
+    }
+
+    /**
+     * Get capture
+     *
+     * @return string
+     */
+    public function getCapture()
+    {
+        return $this->capture;
     }
 }

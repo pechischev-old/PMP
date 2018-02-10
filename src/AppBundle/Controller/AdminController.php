@@ -46,6 +46,7 @@ class AdminController extends UserController
         $data->setTitle($params->get("title"));
         $data->setGenries($params->get("genries"));
         $data->setYear($params->get("startYear"));
+        $data->setCapture($params->get("capture"));
         $endYear = !$endYear ? 0 : $endYear;
         $data->setEndYear($endYear);
         $data->setRate(8.7);

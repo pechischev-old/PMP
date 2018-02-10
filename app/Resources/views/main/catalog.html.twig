@@ -7,10 +7,10 @@
 {% block mainContent %}
 <div class="items-container not-left-indent">
     {% for item in itemsData %}
-        {%  if item %}
+        {% if item %}
         <div class="item col-md-2">
             <a href="{{ path('itempage', {'id': item.id}) }}" class="item__image-container">
-                <img class="clickable" width="142" height="220"/>
+                <img class="clickable" width="142" height="220" src="{{ item.capture }}"/>
             </a>
             <div class="description_container">
                 <div class="item__title not-left-indent col-md-12">{{ item.title }}</div>

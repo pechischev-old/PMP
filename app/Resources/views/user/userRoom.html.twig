@@ -3,6 +3,7 @@
 {% extends "layout.html.twig" %}
 
 {% block javascript %}
+<script type="text/javascript" src="{{ asset('js/imageLoader.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/loadImage.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/saveSettings.js') }}"></script>
 {% endblock %}
@@ -48,7 +49,7 @@
                 <div class="image-loader col-md-6">
                     <div class="image-loader__image" style="background-image: url('{{ app.user.capture }}')"></div>
                     <input type="file" class="image-loader__description" class="image-loader__description" id="fileReader">
-                    <div class="image-loader__description" id="load">загрузить аватар</div>
+                    <div class="image-loader__description clickable" id="load">загрузить аватар</div>
                 </div>
             </div>
         </div>

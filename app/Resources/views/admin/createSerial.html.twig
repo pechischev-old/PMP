@@ -3,6 +3,8 @@
 {% extends "layout.html.twig" %}
 
 {% block javascript %}
+<script type="text/javascript" src="{{ asset('js/imageLoader.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/admin/applyLoadedImage.js') }}"></script>
 <script type="text/javascript" src="{{ asset("js/admin/createSerial.js") }}"></script>
 <script type="text/javascript" src="{{ asset("js/admin/appendViews.js") }}"></script>
 {% endblock %}
@@ -10,10 +12,10 @@
 {% block mainContentStyle %}create-serial{% endblock %}
 
 {% block mainContent %}
-{#<form method="post" action="{{ path("create_serial_action") }}">#}
     <div class="serial-info not-left-indent col-md-12 col-xs-12">
         <div class="form-horizontal">
             <div class="image-container">
+                <input type="file" style="display: none">
                 <img class="image">
             </div>
             <div class="form-block col-xs-8 col-md-8">

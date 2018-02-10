@@ -15,6 +15,8 @@ $(document).ready(() => {
         const actors = $("#actors").val();
         const genries = $("#genries").val();
 
+        const capture = $(".image").attr("src");
+
         const seasonsTitles = $("[name^='seasonTitle']").get();
         const seriesCounts = $("[name^='seriesCount']").get();
 
@@ -36,6 +38,7 @@ $(document).ready(() => {
             endYear: endYear || null,
             actors,
             genries,
+            capture,
             seasonsInfo
         };
 
