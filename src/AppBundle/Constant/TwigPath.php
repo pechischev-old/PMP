@@ -16,4 +16,6 @@ class TwigPath
 
     const REGISTERY_FORM = 'inputForm/registry.html.twig';
     const LOGIN_FORM = 'inputForm/login.html.twig';
+
+    const CREATE_SERIAL = "admin/createSerial.html.twig";
 }

@@ -86,7 +86,7 @@ class DefaultController extends Controller
      * @param array $templateParameters
      * @return Response
      */
-    protected function getResponseByParameters($path, $templateParameters)
+    protected function getResponseByParameters($path, $templateParameters = array())
     {
         $templateParameters[Consts::GENRIES_PARAM] = Genry::getGenries();
         return $this->render($path, $templateParameters);
