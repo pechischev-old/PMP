@@ -35,7 +35,7 @@ class SerialData
     private $year;
 
     /**
-     * @ORM\Column(type="integer", length=4)
+     * @ORM\Column(type="integer", length=4, nullable=true)
      */
     private $endYear;
 

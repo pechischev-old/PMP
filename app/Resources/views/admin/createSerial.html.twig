@@ -10,98 +10,96 @@
 {% block mainContentStyle %}create-serial{% endblock %}
 
 {% block mainContent %}
-<div class="serial-info not-left-indent col-md-12 col-xs-12">
-    <div class="form-horizontal">
-        <div class="image-container">
-            <img class="image">
-        </div>
-        <div class="form-block col-xs-8 col-md-8">
-            <div class="form-group">
-                <div class="col-md-12">
-                    <label class="form-group__form-item">Название</label>
-                    <input type="text" class="form-control" name="tilte">
-                </div>
+{#<form method="post" action="{{ path("create_serial_action") }}">#}
+    <div class="serial-info not-left-indent col-md-12 col-xs-12">
+        <div class="form-horizontal">
+            <div class="image-container">
+                <img class="image">
             </div>
-            <div class="form-group">
-                <div class="col-md-12">
-                    <label class="form-group__form-item">Описание</label>
-                    <textarea class="form-control" name="description" rows="4"></textarea>
+            <div class="form-block col-xs-8 col-md-8">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label class="form-group__form-item">Название</label>
+                        <input type="text" class="form-control" id="title">
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label class="form-group__form-item">Год выпуска</label>
-                    <input type="text" class="form-control" pattern="(19|20)[0-9]*" maxlength="4" name="start-year">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label class="form-group__form-item">Описание</label>
+                        <textarea class="form-control" id="description" rows="4"></textarea>
+                    </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label class="form-group__form-item">Год завершения</label>
-                    <input type="text" pattern="(19|20)[0-9]*" class="form-control" maxlength="4" name="end-year">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="form-group__form-item">Год выпуска</label>
+                        <input type="text" class="form-control" pattern="(19|20)[0-9]*" maxlength="4" id="start-year">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-group__form-item">Год завершения</label>
+                        <input type="text" pattern="(19|20)[0-9]*" class="form-control" maxlength="4" id="end-year">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-12">
-                    <label class="form-group__form-item">Актеры</label>
-                    <input class="form-control" name="actors">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label class="form-group__form-item">Актеры</label>
+                        <input class="form-control" id="actors">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-12">
-                    <label class="form-group__form-item">Жанры</label>
-                    <input class="form-control" name="genries">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label class="form-group__form-item">Жанры</label>
+                        <input class="form-control" id="genries">
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
-</div>
-<div class="seasons col-md-12 col-xs-12">
-    <br>
-
-   {# <div class="form-horizontal season-info col-md-12 not-left-indent">
-        <div class="season-info__icon"></div>
-        <div class="form-horizontal col-md-9">
-            <div class="form-group">
-                <div class="col-md-6">
-                    <label class="season-info__title">Название</label>
-                    <input type="text" class="form-control" name="season-title">
+    <div class="seasons col-md-12 col-xs-12">
+        <br>
+       {# <div class="form-horizontal season-info col-md-12 not-left-indent">
+            <div class="season-info__icon"></div>
+            <div class="form-horizontal col-md-9">
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <label class="season-info__title">Название</label>
+                        <input type="text" class="form-control" name="season-title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <label class="season-info__count">Кол-во серий</label>
+                        <input type="text" class="form-control" name="seriesCount">
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-md-6">
-                    <label class="season-info__count">Кол-во серий</label>
-                    <input type="text" class="form-control" name="seriesCount">
-                </div>
+            <div class="col-md-8">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Название</th>
+                            <th>Путь к изображению</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><input class="empty-input"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
-        <div class="col-md-8">
-            <table class="table table-condensed">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Название</th>
-                        <th>Путь к изображению</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><input class="empty-input"></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
-    </div>#}
-    <div class="add-button col-md-12 clickable">Добавить сезон <img src="{{ asset("img/add.png") }}" class="add-button__icon"></div>
-</div>
-
-<div class="form-group">
-    <div class="col-md-12">
-        <div class="delimeter_light"></div>
-        <button type="submit" class="btn btn-primary">Добавить</button>
-        <button type="reset" class="btn btn-default">Сброс</button>
+        </div>#}
+        <div class="add-button col-md-12 clickable">Добавить сезон <img src="{{ asset("img/add.png") }}" class="add-button__icon"></div>
     </div>
-</div>
-</form>
+
+    <div class="form-group">
+        <div class="col-md-12">
+            <div class="delimeter_light"></div>
+            <button id="submit" class="btn btn-primary">Добавить</button>
+            <button id="reset" class="btn btn-default">Сброс</button>
+        </div>
+    </div>
 {% endblock %}

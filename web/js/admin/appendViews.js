@@ -25,17 +25,17 @@ class SeasonsView {
         col2.innerHTML = '<label class="season-info__count">Кол-во серий</label>';
 
         const seriesElement = this._createInputField("seriesCount" + this._seasonCount);
-        seriesElement.addEventListener("change", () => {
+        /*seriesElement.addEventListener("change", () => {
             table.createRows(seriesElement.value);
             $(window).resize();
-        });
+        });*/
         col2.appendChild(seriesElement);
         this._seasonCount++;
 
         seasonBlock.appendChild(form);
 
-        const col3 = this._createElement("col-md-8", seasonBlock);
-        col3.appendChild(table.container());
+        /*const col3 = this._createElement("col-md-8", seasonBlock); // TODO: вернуть после реализации задачи: "реализовать отображение карточки серии"
+        col3.appendChild(table.container());*/
         return seasonBlock;
     }
 
