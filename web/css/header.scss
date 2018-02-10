@@ -32,6 +32,38 @@
         }
     }
 
+    .search-block {
+        $SEARCH_SIZE: 35px;
+
+        width: 100%;
+        min-width: 200px;
+        max-width: 430px;
+        display: inline-block;
+        position: relative;
+
+        &__search-field {
+            height: $SEARCH_SIZE;
+            border-radius: 10px;
+            padding-right: 40px;
+        }
+
+        &__search-icon {
+            right: 8px;
+            top: 5px;
+            position: absolute;
+            height: 25px;
+            width: 25px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+    }
+
     .user-block {
         float: right;
 

@@ -21,6 +21,28 @@
       color: #FFFFFF; }
     .header .header-block_aligned {
       margin: 16px 0; }
+  .header .search-block {
+    width: 100%;
+    min-width: 200px;
+    max-width: 430px;
+    display: inline-block;
+    position: relative; }
+    .header .search-block__search-field {
+      height: 35px;
+      border-radius: 10px;
+      padding-right: 40px; }
+    .header .search-block__search-icon {
+      right: 8px;
+      top: 5px;
+      position: absolute;
+      height: 25px;
+      width: 25px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      cursor: pointer; }
+      .header .search-block__search-icon:hover {
+        opacity: 0.7; }
   .header .user-block {
     float: right; }
     .header .user-block__text {
