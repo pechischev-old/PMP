@@ -9,7 +9,10 @@
             </a>
         </div>
         <div class="col-xs-10 header-block_aligned">
-            <div class="search-field"></div>
+            <div class="search-block">
+                <input type="text" class="form-control search-block__search-field" placeholder="Введите название">
+                <div class="search-block__search-icon" style="background-image: url('{{ asset('img/lupa.png') }}')"></div>
+            </div>
             <div class="user-block">
                 {% if app.user %}
                     <div class="user-block_registry user">
